@@ -32,9 +32,11 @@ Here is a tentative roadmap (to be challenged!):
 
 ## Audio Tutorial
 
-TO DO!
+![spectrogram](images/spectrogram_example.png)
 
-Since we'll work on audio data, it should be useful to have notions on basic operations on audio. We provide an introductory notebook showing how to load audio data, listen to it in the notebook, plot waveforms, calculate spectrograms, etc. Feel free to contribute and improve this notebook if you see anything that you think is missing.
+Since we'll work on audio data, it should be useful to have notions on basic operations on audio. We provide an introductory notebook showing how to load audio data, listen to it in the notebook, plot waveforms, calculate spectrograms, etc.
+
+Here is a [notebook](https://github.com/hadrienj/microfaune/blob/master/getting_started.ipynb) to getting started! Feel free to contribute and improve this notebook if you see anything that you think is missing.
 
 ## Knowledge Sharing
 
