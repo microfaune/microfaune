@@ -60,6 +60,6 @@ You can find these databases [here](http://machine-listening.eecs.qmul.ac.uk/bir
 
 # Wazo Data
 
-Wazo Data are data from recordings in Cité Universitaire in Paris. All data is not yet accessible (but will be soon). As for now, around 5h of data is available to kick start the project.
+Wazo Data are data from recordings in Cité Universitaire in Paris. All data is not yet accessible but will be soon.
 
 
