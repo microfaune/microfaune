@@ -82,4 +82,3 @@ You can find these databases [here](http://machine-listening.eecs.qmul.ac.uk/bir
 
 Wazo Data are data from recordings in Cité Universitaire in Paris. Data should be accessible soon.
 
-
