@@ -82,3 +82,12 @@ You can find these databases [here](http://machine-listening.eecs.qmul.ac.uk/bir
 
 Wazo Data are data from recordings in Cité Universitaire in Paris. Data should be accessible soon.
 
+# Avifauna at Cité Universitaire
+
+Here is the data from the scientific survey from 2014:
+
+![2014_1](images/releve_2014_1.png)
+
+![2014_2](images/releve_2014_2.png)
+
+
