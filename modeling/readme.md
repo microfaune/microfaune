@@ -16,7 +16,7 @@ The model would have a high False Positive rate (the model thinks that there is 
 
 This first model could be either the model from digit recognition or from Hadrien's replication of Cakir et al. paper (cf. notebook [here](https://colab.research.google.com/drive/1XBNdn98z89HpH2hCqi-bk_fDEQf1SgGA)).
 
-## Model assessement
+## Model assessment
 
 Participants: Camille
 

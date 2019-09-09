@@ -8,20 +8,6 @@ The aim is to provide the scientific community with a labeled database (bird/no-
 
 The goal is to advance leverage state of the art research and contribute to open data in the field.
 
-# Skills
-
-You have or want to acquire any of these skills:
-
-- Machine Learning
-- Deep Learning (CNN, RNN...)
-- Web Development
-- Transfer Learning
-- Signal Processing
-- Data Engineering
-- Audio processing
-- Ecological interest
-...
-
 # Roadmap
 
 Here is a tentative roadmap (to be challenged!):
@@ -38,14 +24,48 @@ Since we'll work on audio data, it should be useful to have notions on basic ope
 
 Here is a [notebook](https://github.com/hadrienj/microfaune/blob/master/getting_started.ipynb) to get started! Feel free to contribute and improve this notebook!
 
-## Knowledge Sharing
+## Collaboration
 
-Let's try to define the setup we'll need and try to have a homogeneous workspace to make collaboration easy (and remote work possible). Here's my take (to be challenged as well :) ):
+- Google Doc: Details on the projects are gathered [here](https://docs.google.com/document/d/1yREuA9-AuH0du2uhvGiSryd0PYd7ogVkyXDWf-VLQxw/edit?usp=sharing).
+- Trello: This is [here](https://trello.com/b/amUmPAtu/microfaune).
 
-- Using pipenv to create virtual environments
-- Using Git/Github to collaborate
-- Using Jupyter notebook (local and Google Colab)
-- Understand audio data and possibilities (cf. Audio Tutorial)
+## Setup
+
+Using pipenv to create virtual environment. You need to have `pipenv` installed:
+
+On mac:
+
+```
+brew install pipenv
+```
+
+Other plateforms: see the [doc](https://docs.pipenv.org/en/latest/install/#installing-pipenv).
+
+Then, you can fork or clone this repo and run:
+
+```
+pipenv install
+```
+
+And you should have all dependencies installed! (Locking can take some time so be patient!).
+
+To install a lib you need, e.g:
+
+```
+pipenv install numpy
+```
+
+To run Python from the virtual environment:
+
+```
+pipenv run ...
+```
+
+For instance, to run a Jupyter notebook:
+
+```
+pipenv run jupyter notebook
+```
 
 # External Data
 
@@ -60,6 +80,6 @@ You can find these databases [here](http://machine-listening.eecs.qmul.ac.uk/bir
 
 # Wazo Data
 
-Wazo Data are data from recordings in Cité Universitaire in Paris. All data is not yet accessible but will be soon.
+Wazo Data are data from recordings in Cité Universitaire in Paris. Data should be accessible soon.
 
 
