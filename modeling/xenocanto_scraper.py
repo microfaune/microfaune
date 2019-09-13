@@ -22,7 +22,7 @@ if not os.path.exists(os.path.join(os.getcwd(), dataPath)):
 os.chdir(os.path.join(os.getcwd(),dataPath))
 
 # LOAD LATIN NAMES OF THE BIRDS YOU ARE INTERESTED IN #########################
-oiseaux_path = '/home/pfarnole/spyder_projects/microfaune/oiseaux.csv'
+oiseaux_path = 'oiseaux.csv'
 df = pd.read_csv(oiseaux_path)
 birdList = list(df['Nom latin'].apply(lambda x: "+".join(x.split(" "))))
 
