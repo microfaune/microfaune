@@ -15,18 +15,17 @@ import urllib.request as urllib2
 import os
 import pandas as pd
 
-# CHOOSE AND CREATE FOLDER WHERE TO SAVE THE SOUNDS ###########################
+# LOAD LATIN NAMES OF THE BIRDS YOU ARE INTERESTED IN #########################
+oiseaux_path = 'oiseaux.csv'
+df = pd.read_csv(oiseaux_path)
+birdList = list(df['Nom latin'].apply(lambda x: "+".join(x.split(" "))))
+
+# CHOOSE AND CREATE FOLDER WHERE TO SAVE THE SOUNDS ###########################
 dataPath = 'rawData_citeU'
 if not os.path.exists(os.path.join(os.getcwd(), dataPath)):
     os.mkdir(os.path.join(os.getcwd(),dataPath))
 os.chdir(os.path.join(os.getcwd(),dataPath))
 
-# LOAD LATIN NAMES OF THE BIRDS YOU ARE INTERESTED IN #########################
-oiseaux_path = 'oiseaux.csv'
-df = pd.read_csv(oiseaux_path)
-birdList = list(df['Nom latin'].apply(lambda x: "+".join(x.split(" "))))
-
-# CREATE INDIVIDUAL FOLDERS FOR EACH BIRD #####################################
 paths = []
 for bird in birdList:
     if not os.path.exists(os.path.join(os.getcwd(), bird)):
@@ -37,7 +36,7 @@ for bird in birdList:
     paths.append(os.path.join(os.getcwd(),bird))
 
 
-# MAIN FUNCTION ###############################################################
+# MAIN FUNCTION ###############################################################
 def downloadBirdCalls(bird,path):
     """
     
@@ -55,7 +54,7 @@ def downloadBirdCalls(bird,path):
     """
     stub = "http://www.xeno-canto.org/browse.php?species_nr=&query="
     print("#"*30)
-    print("DOWNLOADING {0} to {1}".format(bird,path))
+    print("DOWNLOADING %s to %s" % (bird,path))
     os.chdir(path)
     n = 1
     page = '&pg='
@@ -77,6 +76,7 @@ def downloadBirdCalls(bird,path):
             grabThis = grabThis + soundUrl
             os.system(grabThis)
 
-# ACTUALLY CALL THE FUNCTION ##################################################
+
+# ACTUALLY CALL THE FUNCTION ##################################################
 for bird,path in zip(birdList,paths):
     downloadBirdCalls(bird,path)
