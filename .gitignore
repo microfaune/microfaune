@@ -1,2 +1,6 @@
 .DS_Store
 .ipynb_checkpoints/
+
+data/
+**/build
+**/__pycache__
