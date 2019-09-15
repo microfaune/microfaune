@@ -9,6 +9,6 @@ def plot_spec(S):
         S : array-like
             Spectrogram.
     """
-    fig = plt.figure(figsize=(10, 2))
+    plt.figure(figsize=(10, 2))
     plt.imshow(S, cmap=plt.get_cmap('inferno'), aspect='auto', origin='lower')
     plt.axis('off')

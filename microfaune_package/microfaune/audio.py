@@ -30,7 +30,7 @@ def load_wav(path, decimate=None):
     return fs, data
 
 
-def create_spec(data, fs, n_mels = 32, n_fft = 2048, hop_len = 1024):
+def create_spec(data, fs, n_mels=32, n_fft=2048, hop_len=1024):
     """Compute the Mel spectrogram from audio data.
 
         Parameters
@@ -62,9 +62,10 @@ def create_spec(data, fs, n_mels = 32, n_fft = 2048, hop_len = 1024):
     return S
 
 
-def wav2spc(wav_file, fs=44100, n_mels=40, n_fft = 2048, hop_len = 1024, duration=10):
+def wav2spc(wav_file, fs=44100, n_mels=40, n_fft=2048, hop_len=1024,
+            duration=10):
     """Load a wav file and compute its MEL spectogram.
- 
+
        Parameters
         ----------
         wave_file : str
@@ -85,9 +86,9 @@ def wav2spc(wav_file, fs=44100, n_mels=40, n_fft = 2048, hop_len = 1024, duratio
         spec : array-like
             Array of shape (Mel bands, time) containing the spectrogram.
     """
-    
+
     x_fs, x = load_wav(wav_file)
-    
+
     if x_fs != fs:
         raise ValueError(f"wav file with wrong frequency {x_fs}: {wav_file}")
     spec = create_spec(x[:fs*duration], fs, n_mels, n_fft, hop_len)
