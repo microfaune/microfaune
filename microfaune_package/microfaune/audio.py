@@ -3,9 +3,9 @@ import numpy as np
 from scipy.io import wavfile
 import signal
 
-
 def load_wav(path, decimate=None):
-    """Load audio data.
+    """
+        Load audio data.
 
         Parameters
         ----------
@@ -16,9 +16,12 @@ def load_wav(path, decimate=None):
 
         Returns:
         -------
-        S : array-like
-            Array of shape (Mel bands, time) containing the spectrogram.
+        data : array-like
+            Audio data.
+        fs : int
+            Sampling frequency in Hz.
     """
+    # Load data
     fs, data = wavfile.read(path)
 
     data = data.astype(np.float32)
@@ -28,6 +31,30 @@ def load_wav(path, decimate=None):
         fs /= decimate
 
     return fs, data
+
+def cut_audio(old_path, new_path, start, end):
+    """
+        Cut audio data to specific starting and end point and save it as a new wav file
+
+        Parameters
+        ----------
+        old_path : str
+            Original wav file path.
+        new_path : str
+            New wav file path.
+        start : float
+            Desired start time of new audio in seconds.
+        end : float
+            Desired end time of new audio in seconds.
+
+        Returns:
+        -------
+        True : boolean
+    """
+    fs, data = wavfile.read(old_path)
+    indx_start = int(start*fs)
+    indx_end = int(end*fs)+1
+    wavfile.write(new_path,fs,data[indx_start:indx_end])
 
 
 def create_spec(data, fs, n_mels=32, n_fft=2048, hop_len=1024):
