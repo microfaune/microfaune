@@ -6,7 +6,7 @@ def plot_spec(S):
 
         Parameters
         ----------
-        S : array-like
+        S: array-like
             Spectrogram.
     """
     plt.figure(figsize=(10, 2))
