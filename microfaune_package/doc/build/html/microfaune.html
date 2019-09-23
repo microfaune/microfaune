@@ -184,6 +184,22 @@
 </dd></dl>
 
 <dl class="function">
+<dt id="microfaune.audio.cut_audio">
+<code class="sig-prename descclassname">microfaune.audio.</code><code class="sig-name descname">cut_audio</code><span class="sig-paren">(</span><em class="sig-param">old_path</em>, <em class="sig-param">new_path</em>, <em class="sig-param">start</em>, <em class="sig-param">end</em><span class="sig-paren">)</span><a class="headerlink" href="#microfaune.audio.cut_audio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cut audio data to specific starting and end point and save it as a new wav file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>old_path</strong> (<em>str</em>) – Original wav file path.</p></li>
+<li><p><strong>new_path</strong> (<em>str</em>) – New wav file path.</p></li>
+<li><p><strong>start</strong> (<em>float</em>) – Desired start time of new audio in seconds.</p></li>
+<li><p><strong>end</strong> (<em>float</em>) – Desired end time of new audio in seconds.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
 <dt id="microfaune.audio.load_wav">
 <code class="sig-prename descclassname">microfaune.audio.</code><code class="sig-name descname">load_wav</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">decimate=None</em><span class="sig-paren">)</span><a class="headerlink" href="#microfaune.audio.load_wav" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load audio data.</p>
@@ -233,7 +249,7 @@
 <p>Module containing models for bird song detection.</p>
 <dl class="class">
 <dt id="microfaune.detection.RNNDetector">
-<em class="property">class </em><code class="sig-prename descclassname">microfaune.detection.</code><code class="sig-name descname">RNNDetector</code><span class="sig-paren">(</span><em class="sig-param">weights_file='/home/florent/personnel/microfaune/microfaune_package/microfaune/data/model_weights-20190919_220113.h5'</em><span class="sig-paren">)</span><a class="headerlink" href="#microfaune.detection.RNNDetector" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">microfaune.detection.</code><code class="sig-name descname">RNNDetector</code><span class="sig-paren">(</span><em class="sig-param">weights_file='/home/florent/projects/microfaune/microfaune/microfaune_package/microfaune/data/model_weights-20190919_220113.h5'</em><span class="sig-paren">)</span><a class="headerlink" href="#microfaune.detection.RNNDetector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Class wrapping a rnn model</p>
 <dl class="method">
@@ -312,6 +328,23 @@
 </div>
 <div class="section" id="module-microfaune.plot">
 <span id="microfaune-plot-module"></span><h2>microfaune.plot module<a class="headerlink" href="#module-microfaune.plot" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="microfaune.plot.plot_audio">
+<code class="sig-prename descclassname">microfaune.plot.</code><code class="sig-name descname">plot_audio</code><span class="sig-paren">(</span><em class="sig-param">fs</em>, <em class="sig-param">data</em><span class="sig-paren">)</span><a class="headerlink" href="#microfaune.plot.plot_audio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot audio data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>array-like</em>) – Audio data.</p></li>
+<li><p><strong>fs</strong> (<em>int</em>) – Sampling frequency in Hz.</p></li>
+<li><p><strong>Returns</strong> – </p></li>
+<li><p><strong>-------</strong> – </p></li>
+<li><p><strong>None</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="function">
 <dt id="microfaune.plot.plot_spec">
 <code class="sig-prename descclassname">microfaune.plot.</code><code class="sig-name descname">plot_spec</code><span class="sig-paren">(</span><em class="sig-param">S</em><span class="sig-paren">)</span><a class="headerlink" href="#microfaune.plot.plot_spec" title="Permalink to this definition">¶</a></dt>

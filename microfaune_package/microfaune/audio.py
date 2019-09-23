@@ -45,9 +45,6 @@ def cut_audio(old_path, new_path, start, end):
         end : float
             Desired end time of new audio in seconds.
 
-        Returns:
-        -------
-        True : boolean
     """
     fs, data = wavfile.read(old_path)
     indx_start = int(start*fs)
