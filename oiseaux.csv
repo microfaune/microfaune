@@ -32,8 +32,8 @@ Moineau domestique;moineau_domestique;Passer domesticus;Passeridae;nicheur certa
 Moineau friquet;moineau_friquet;Passer montanus;Passeridae;nicheur certain;;;2587;1692;;2587;;;;
 Mouette rieuse;mouette_rieuse;Chroicocephalus ridibundus;Laridés;(Parc Montsouris) En survol (direction Montsouris);;;4470;2537;;4470;;;;
 Perruche à collier;perruche_a_collier;Psittacula krameri;Psittacidé;nicheur certain au Parc Montsouris;;;4845;2754;;4845;;;;
-Pic épeiche;pic_epeiche;Dendrocopos major;Picidae;cris brefs aigus + martellement du bois;;;3865;1067;;3865;;;;
-Pic épeichette;pic_epeichette;Dendrocopos minor;Picidae;martellement du bois;;;4489;2569;!! Plutôt 1500 moyenne;1500;;;;
+Pic épeiche;pic_epeiche;Dendrocopos major;Picidae;;cris brefs aigus + martellement du bois;;3865;1067;;3865;;;;
+Pic épeichette;pic_epeichette;Dendrocopos minor;Picidae;nicheur certain;martellement du bois;;4489;2569;!! Plutôt 1500 moyenne;1500;;;;
 Pic vert;pic_vert;Picus viridis;Picidae;nicheur certain au Parc Montsouris;;;8535;8413;!! Plutôt 5000 moyenne;5000;;;;
 Pie bavarde;pie_bavarde;Pica pica;Corvidae;nicheur certain;;;3938;1307;;3938;;;;
 Pigeon biset des villes;pigeon_biset_des_villes;Columba livia;Columbidae;nicheur certain;roucoulement;2 secondes / se répètent;4564;2690;!! Plutôt 400 moyenne;400;;;;
