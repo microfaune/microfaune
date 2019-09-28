@@ -5,6 +5,11 @@
 * Go to the folder *microfaune_package*
 * Run the command `pip install .`
 
+### With Pipenv
+
+* Go to the folder *microfaune_package*
+* Run the command `pipenv run pip install .`
+
 ## Usage
 
 Can be used as any package python:
