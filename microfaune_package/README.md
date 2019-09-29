@@ -20,6 +20,17 @@ from microfaune import audio
 s, f = audio.load_wav("whatever.wav")
 ```
 
+To use the detection model:
+
+```python
+from microfaune.detection import RNNDetector
+
+detector = RNNDetector()
+global_score, local_score = detector.predict_on_wav("whatever.wav")
+
+```
+
+
 ## Documentation generation
 
 Once built, the documentation is available by opening the file `doc/build/html/index.html`.
