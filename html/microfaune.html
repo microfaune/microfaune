@@ -1,0 +1,413 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>microfaune package &mdash; microfaune  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to microfaune’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> microfaune
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">microfaune package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-microfaune.audio">microfaune.audio module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-microfaune.detection">microfaune.detection module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-microfaune.plot">microfaune.plot module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-microfaune">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">microfaune</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>microfaune package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/microfaune.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="microfaune-package">
+<h1>microfaune package<a class="headerlink" href="#microfaune-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-microfaune.audio">
+<span id="microfaune-audio-module"></span><h2>microfaune.audio module<a class="headerlink" href="#module-microfaune.audio" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="microfaune.audio.create_spec">
+<code class="sig-prename descclassname">microfaune.audio.</code><code class="sig-name descname">create_spec</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">fs</em>, <em class="sig-param">n_mels=32</em>, <em class="sig-param">n_fft=2048</em>, <em class="sig-param">hop_len=1024</em><span class="sig-paren">)</span><a class="headerlink" href="#microfaune.audio.create_spec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the Mel spectrogram from audio data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>array-like</em>) – Audio data.</p></li>
+<li><p><strong>fs</strong> (<em>int</em>) – Sampling frequency in Hz.</p></li>
+<li><p><strong>n_mels</strong> (<em>int</em>) – Number of Mel bands to generate.</p></li>
+<li><p><strong>n_fft</strong> (<em>int</em>) – Length of the FFT window.</p></li>
+<li><p><strong>hop_len</strong> (<em>int</em>) – Number of samples between successive frames.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>S</strong> – Array of shape (Mel bands, time) containing the spectrogram.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="microfaune.audio.cut_audio">
+<code class="sig-prename descclassname">microfaune.audio.</code><code class="sig-name descname">cut_audio</code><span class="sig-paren">(</span><em class="sig-param">old_path</em>, <em class="sig-param">new_path</em>, <em class="sig-param">start</em>, <em class="sig-param">end</em><span class="sig-paren">)</span><a class="headerlink" href="#microfaune.audio.cut_audio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cut audio data to specific starting and end point and save it as a new wav file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>old_path</strong> (<em>str</em>) – Original wav file path.</p></li>
+<li><p><strong>new_path</strong> (<em>str</em>) – New wav file path.</p></li>
+<li><p><strong>start</strong> (<em>float</em>) – Desired start time of new audio in seconds.</p></li>
+<li><p><strong>end</strong> (<em>float</em>) – Desired end time of new audio in seconds.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="microfaune.audio.load_wav">
+<code class="sig-prename descclassname">microfaune.audio.</code><code class="sig-name descname">load_wav</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">decimate=None</em><span class="sig-paren">)</span><a class="headerlink" href="#microfaune.audio.load_wav" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load audio data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – Wav file path.</p></li>
+<li><p><strong>decimate</strong> (<em>int</em>) – If not None, downsampling by a factor of <cite>decimate</cite> value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>S</strong> – Array of shape (Mel bands, time) containing the spectrogram.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="microfaune.audio.wav2spc">
+<code class="sig-prename descclassname">microfaune.audio.</code><code class="sig-name descname">wav2spc</code><span class="sig-paren">(</span><em class="sig-param">wav_file</em>, <em class="sig-param">fs=44100</em>, <em class="sig-param">n_mels=40</em>, <em class="sig-param">n_fft=2048</em>, <em class="sig-param">hop_len=1024</em>, <em class="sig-param">duration=10</em><span class="sig-paren">)</span><a class="headerlink" href="#microfaune.audio.wav2spc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load a wav file and compute its MEL spectogram.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>wave_file</strong> (<em>str</em>) – path to a wav file.</p></li>
+<li><p><strong>fs</strong> (<em>int</em>) – Sampling frequency in Hz.</p></li>
+<li><p><strong>n_mels</strong> (<em>int</em>) – Number of Mel bands to generate.</p></li>
+<li><p><strong>n_fft</strong> (<em>int</em>) – Length of the FFT window.</p></li>
+<li><p><strong>hop_len</strong> (<em>int</em>) – Number of samples between successive frames.</p></li>
+<li><p><strong>duration</strong> (<em>int</em>) – Duration of the sound to consider (starting at the beginning)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>spec</strong> – Array of shape (Mel bands, time) containing the spectrogram.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-microfaune.detection">
+<span id="microfaune-detection-module"></span><h2>microfaune.detection module<a class="headerlink" href="#module-microfaune.detection" title="Permalink to this headline">¶</a></h2>
+<p>Module containing models for bird song detection.</p>
+<dl class="class">
+<dt id="microfaune.detection.RNNDetector">
+<em class="property">class </em><code class="sig-prename descclassname">microfaune.detection.</code><code class="sig-name descname">RNNDetector</code><span class="sig-paren">(</span><em class="sig-param">weights_file='/home/florent/projects/microfaune/microfaune/microfaune_package/microfaune/data/model_weights-20190919_220113.h5'</em><span class="sig-paren">)</span><a class="headerlink" href="#microfaune.detection.RNNDetector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class wrapping a rnn model</p>
+<dl class="method">
+<dt id="microfaune.detection.RNNDetector.compute_features">
+<code class="sig-name descname">compute_features</code><span class="sig-paren">(</span><em class="sig-param">audio_signals</em><span class="sig-paren">)</span><a class="headerlink" href="#microfaune.detection.RNNDetector.compute_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute features on audio signals.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>audio_signals</strong> (<em>list</em>) – Audio signals of possibly various lengths.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>X</strong> – Features for each audio signal</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="microfaune.detection.RNNDetector.create_model">
+<code class="sig-name descname">create_model</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#microfaune.detection.RNNDetector.create_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create RNN model.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="microfaune.detection.RNNDetector.free_mem">
+<code class="sig-name descname">free_mem</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#microfaune.detection.RNNDetector.free_mem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Release GPU memory.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="microfaune.detection.RNNDetector.model">
+<em class="property">property </em><code class="sig-name descname">model</code><a class="headerlink" href="#microfaune.detection.RNNDetector.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tensorflow Keras like model</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="microfaune.detection.RNNDetector.predict">
+<code class="sig-name descname">predict</code><span class="sig-paren">(</span><em class="sig-param">X</em><span class="sig-paren">)</span><a class="headerlink" href="#microfaune.detection.RNNDetector.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predict bird presence on spectograms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like</em>) – List of features on which to run the model.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>scores</strong> (<em>array-like</em>) – Prediction scores of the classifier on each audio signal</p></li>
+<li><p><strong>local_scores</strong> (<em>array-like</em>) – Step-by-step  prediction scores for each audio signal</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="microfaune.detection.RNNDetector.predict_on_wav">
+<code class="sig-name descname">predict_on_wav</code><span class="sig-paren">(</span><em class="sig-param">wav_file</em><span class="sig-paren">)</span><a class="headerlink" href="#microfaune.detection.RNNDetector.predict_on_wav" title="Permalink to this definition">¶</a></dt>
+<dd><p>Detect bird presence in wav file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>wav_file</strong> (<em>str</em>) – wav file path.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>score</strong> (<em>float</em>) – Prediction score of the classifier on the whole sequence</p></li>
+<li><p><strong>local_score</strong> (<em>array-like</em>) – Time step prediction score</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-microfaune.plot">
+<span id="microfaune-plot-module"></span><h2>microfaune.plot module<a class="headerlink" href="#module-microfaune.plot" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="microfaune.plot.plot_audio">
+<code class="sig-prename descclassname">microfaune.plot.</code><code class="sig-name descname">plot_audio</code><span class="sig-paren">(</span><em class="sig-param">fs</em>, <em class="sig-param">data</em><span class="sig-paren">)</span><a class="headerlink" href="#microfaune.plot.plot_audio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot audio data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>array-like</em>) – Audio data.</p></li>
+<li><p><strong>fs</strong> (<em>int</em>) – Sampling frequency in Hz.</p></li>
+<li><p><strong>Returns</strong> – </p></li>
+<li><p><strong>-------</strong> – </p></li>
+<li><p><strong>None</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="microfaune.plot.plot_spec">
+<code class="sig-prename descclassname">microfaune.plot.</code><code class="sig-name descname">plot_spec</code><span class="sig-paren">(</span><em class="sig-param">S</em><span class="sig-paren">)</span><a class="headerlink" href="#microfaune.plot.plot_spec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot a spectrogram.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>S</strong> (<em>array-like</em>) – Spectrogram.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-microfaune">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-microfaune" title="Permalink to this headline">¶</a></h2>
+<p>Module for the project microfaune</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to microfaune’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, microfaune team
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
