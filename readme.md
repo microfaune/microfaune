@@ -29,6 +29,10 @@ Here is a [notebook](https://github.com/hadrienj/microfaune/blob/master/getting_
 - Google Doc: Details on the projects are gathered [here](https://docs.google.com/document/d/1yREuA9-AuH0du2uhvGiSryd0PYd7ogVkyXDWf-VLQxw/edit?usp=sharing).
 - Trello: This is [here](https://trello.com/b/amUmPAtu/microfaune).
 
+## The Microfaune package
+
+You can find the documentation of the Microfaune package [here](https://hadrienj.github.io/microfaune/).
+
 ## Setup
 
 Using pipenv to create virtual environment. You need to have `pipenv` installed:
