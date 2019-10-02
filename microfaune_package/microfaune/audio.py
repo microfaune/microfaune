@@ -3,25 +3,22 @@ import numpy as np
 from scipy.io import wavfile
 import signal
 
+
 def load_wav(path, decimate=None):
-    """
-        Load audio data.
+    """Load audio data.
 
         Parameters
         ----------
-        path : str
+        path: str
             Wav file path.
-        decimate : int
+        decimate: int
             If not None, downsampling by a factor of `decimate` value.
 
-        Returns:
+        Returns
         -------
-        data : array-like
-            Audio data.
-        fs : int
-            Sampling frequency in Hz.
+        S: array-like
+            Array of shape (Mel bands, time) containing the spectrogram.
     """
-    # Load data
     fs, data = wavfile.read(path)
 
     data = data.astype(np.float32)
@@ -31,6 +28,7 @@ def load_wav(path, decimate=None):
         fs /= decimate
 
     return fs, data
+
 
 def cut_audio(old_path, new_path, start, end):
     """
@@ -47,9 +45,6 @@ def cut_audio(old_path, new_path, start, end):
         end : float
             Desired end time of new audio in seconds.
 
-        Returns:
-        -------
-        True : boolean
     """
     fs, data = wavfile.read(old_path)
     indx_start = int(start*fs)
@@ -62,20 +57,20 @@ def create_spec(data, fs, n_mels=32, n_fft=2048, hop_len=1024):
 
         Parameters
         ----------
-        data : array-like
+        data: array-like
             Audio data.
-        fs : int
+        fs: int
             Sampling frequency in Hz.
-        n_mels : int
+        n_mels: int
             Number of Mel bands to generate.
-        n_fft : int
+        n_fft: int
             Length of the FFT window.
-        hop_len : int
+        hop_len: int
             Number of samples between successive frames.
 
-        Returns:
+        Returns
         -------
-        S : array-like
+        S: array-like
             Array of shape (Mel bands, time) containing the spectrogram.
     """
     # Calculate spectrogram
@@ -94,24 +89,24 @@ def wav2spc(wav_file, fs=44100, n_mels=40, n_fft=2048, hop_len=1024,
     """Load a wav file and compute its MEL spectogram.
 
        Parameters
-        ----------
-        wave_file : str
-            path to a wav file.
-        fs : int
-            Sampling frequency in Hz.
-        n_mels : int
-            Number of Mel bands to generate.
-        n_fft : int
-            Length of the FFT window.
-        hop_len : int
-            Number of samples between successive frames.
-        duration: int
-            Duration of the sound to consider (starting at the beginning)
+       ----------
+       wave_file: str
+           path to a wav file.
+       fs: int
+           Sampling frequency in Hz.
+       n_mels: int
+           Number of Mel bands to generate.
+       n_fft: int
+           Length of the FFT window.
+       hop_len: int
+           Number of samples between successive frames.
+       duration: int
+           Duration of the sound to consider (starting at the beginning)
 
-        Returns:
-        -------
-        spec : array-like
-            Array of shape (Mel bands, time) containing the spectrogram.
+       Returns
+       --------
+       spec: array-like
+           Array of shape (Mel bands, time) containing the spectrogram.
     """
 
     x_fs, x = load_wav(wav_file)
