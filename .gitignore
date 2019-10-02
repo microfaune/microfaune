@@ -53,3 +53,7 @@ data/!
 /viz/audio/tourterelle_turque.wav
 /viz/audio/trogolodyte_mignon.wav
 /viz/audio/verdier_d_europe.wav
+/viz/freq_mean_species_sans_pixels_sous_mediane.txt
+/viz/freq_std_species_sans_pixels_sous_mediane.txt
+/viz/audio/test_denoising/Screenshots/
+/viz/audio/test_denoising/_DS_Store
