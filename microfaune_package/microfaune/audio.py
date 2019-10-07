@@ -29,6 +29,27 @@ def load_wav(path, decimate=None):
 
     return fs, data
 
+def load_mp3(path):
+    """
+        Load audio data.
+
+        Parameters
+        ----------
+        path : str
+            mp3 file path.
+
+        Returns:
+        -------
+        data : array-like
+            Audio data.
+        fs : int
+            Sampling frequency in Hz.
+    """
+    # Load data
+    data, fs = librosa.core.load(path, sr=None)
+
+    return fs, data
+  
 
 def cut_audio(old_path, new_path, start, end):
     """
@@ -51,6 +72,7 @@ def cut_audio(old_path, new_path, start, end):
     indx_end = int(end*fs)+1
     wavfile.write(new_path,fs,data[indx_start:indx_end])
 
+    return True
 
 def create_spec(data, fs, n_mels=32, n_fft=2048, hop_len=1024):
     """Compute the Mel spectrogram from audio data.
@@ -84,8 +106,7 @@ def create_spec(data, fs, n_mels=32, n_fft=2048, hop_len=1024):
     return S
 
 
-def wav2spc(wav_file, fs=44100, n_mels=40, n_fft=2048, hop_len=1024,
-            duration=10):
+def wav2spc(wav_file, fs=44100, n_mels=40, n_fft=2048, hop_len=1024, duration=10):
     """Load a wav file and compute its MEL spectogram.
 
        Parameters
@@ -115,3 +136,85 @@ def wav2spc(wav_file, fs=44100, n_mels=40, n_fft=2048, hop_len=1024,
         raise ValueError(f"wav file with wrong frequency {x_fs}: {wav_file}")
     spec = create_spec(x[:fs*duration], fs, n_mels, n_fft, hop_len)
     return spec
+
+
+def file2spec(path_file, scale_spec="linear", N_MELS=40, window_length=0.020, overlap=0.5, f_max=15000, duration=10):
+    """ Compute spectogram from a wav or mp3 file.
+
+           Parameters
+            ----------
+            path_file : str
+                path to a wav or mp3 file.
+            scale_spec : str
+                scale used to use to compute spectogram, can be "linear" or "MEL".
+            N_MELS : int
+                Number of Mel bands to generate.
+            window_length : float
+                Length of the FFT window in seconds.
+            overlap : float
+                Overlap of the FFT windows.
+            f_max : int
+                Maximum frequency of the FFT domain.
+            duration: int
+                Duration of the sound to consider (starting at the beginning)
+
+            Returns:
+            -------
+            spec : array-like
+                Array of shape (frequency, time) containing the spectrogram.
+            t : array-like
+                Array of shape (time, 1) containing the time scale of spectogram.
+                None if MEL scale is used
+            f : array-like
+                Array of shape (frequency, 1) containing the frequency scale of spectogram.
+                None if MEL scale is used
+        """
+
+    # Load map3 or wav file
+
+    if path_file[-4:] == ".wav":
+        x_fs, x = audio.load_wav(path_file)
+
+    elif path_file[-4:] == ".mp3":
+        x_fs, x = audio.load_mp3(path_file)
+
+    else:
+        raise ValueError("Wrong file format, use mp3 or wav")
+
+    shape = np.shape(x)
+    # If the file contains several channel
+    if len(shape) > 1:
+        x = np.sum(x, axis=1)
+
+    # Derive FFT parameters
+    N_FFT = int(window_length * x_fs) + 1
+    HOP_LEN = int(overlap * window_length * x_fs) + 1
+
+    # Compute spectograms
+    if (scale_spec == "linear"):
+        frequency_resolution = x_fs / N_FFT
+        size_frequency_axis = 1 + floor(f_max / frequency_resolution)
+        f, t, spec = signal.stft(x[:int(x_fs * duration) + 1], fs=x_fs, nperseg=N_FFT, noverlap=HOP_LEN)
+        # scipy returns a complex array, only the modulus is used in spectograms
+        spec = np.abs(spec)
+        # remove frequency above f_max
+        if f[-1] > f_max:
+            fsup_to_fmax = np.where(f > f_max)
+            f = f[0:fsup_to_fmax[0][0] + 1]
+            spec = spec[0:fsup_to_fmax[0][0] + 1, :]
+
+    elif (scale_spec == "MEL"):
+        # librosa library does not give access to t and f
+        spec = librosa.feature.melspectrogram(x[:int(fs * duration) + 1], sr=x_fs, n_fft=N_FFT, hop_length=HOP_LEN,
+                                              n_mels=N_MELS)
+        spec = np.abs(spec)
+        t = None
+        f = None
+
+    else:
+        raise ValueError(f"Wrong scale_spec parameter {scale_spec}, use linear or MEL")
+
+    # Convert power to dB with the minimum as a reference, only positive dB
+    spec = librosa.power_to_db(spec, ref=np.min(spec))
+
+    return spec, t, f, x_fs
