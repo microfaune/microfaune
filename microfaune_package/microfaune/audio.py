@@ -49,7 +49,7 @@ def load_mp3(path):
             Sampling frequency in Hz.
     """
     # Load data
-    fs, data = librosa.core.load(path, sr=None)
+    data, fs = librosa.core.load(path, sr=None)
 
     return fs, data
 
@@ -77,6 +77,7 @@ def cut_audio(old_path, new_path, start, end):
     indx_end = int(end*fs)+1
     wavfile.write(new_path,fs,data[indx_start:indx_end])
 
+    return True
 
 def create_spec(data, fs, n_mels=32, n_fft=2048, hop_len=1024):
     """Compute the Mel spectrogram from audio data.
@@ -180,7 +181,7 @@ def file2spec(path_file, scale_spec="linear", N_MELS=40, window_length=0.020, ov
         x_fs, x = audio.load_wav(path_file)
 
     elif path_file[-4:] == ".mp3":
-        x, x_fs = librosa.core.load(path_file, sr=None)
+        x_fs, x = audio.load_mp3(path_file)
 
     else:
         raise ValueError("Wrong file format, use mp3 or wav")
