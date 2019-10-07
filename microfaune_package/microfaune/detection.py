@@ -6,6 +6,8 @@ from tensorflow import keras
 from tensorflow.keras import layers
 from tensorflow.math import reduce_max
 
+os.chdir('/home/christian/microfaune/microfaune_package/')
+
 from .audio import load_wav, create_spec
 
 RNN_WEIGHTS_FILE = os.path.abspath(
