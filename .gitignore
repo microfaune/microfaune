@@ -10,8 +10,6 @@ data/!
 /viz/f_min_species_q95.txt
 /viz/f_median_species_q90.txt
 /viz/f_median_species_q95.txt
-/viz/spec.png
-/viz/spec_wav.png
 /viz/spec_10sec_species_q90
 /viz/spec_10sec_species_q95
 /viz/audio/species_wav/
