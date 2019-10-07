@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 def plot_spec(spec, t, f, fs, scale_spec="linear", window_length=0.20, N_MELS=40, overlap=0.5,
               plot_title="", fig_size=(20, 5), save_fig=False, save_path="spec.png"):
     """ Plot spectogram.
-
            Parameters
             ----------
             spec : array-like
@@ -185,6 +184,7 @@ def find_most_used_frequencies(f, spec):
     freq_max = round(np.quantile(freq_most_used, 0.90), 0)
 
     return [freq_median, freq_min, freq_max]
+
 
 
 def plot_audio(fs, data):
