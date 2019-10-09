@@ -1,61 +1,53 @@
-Nom vernaculaire;Nom pour fichier;Nom latin;Famille;Statut de reproducteur;Type de chants;Durée approx du chant;Fréquence moyenne;Fréquence écart type;Pbe;Fréquence moyenne après corr;;;;
-Accenteur mouchet;accenteur_mouchet;Prunella modularis;Prunellidae;nicheur certain;;;4433;2175;;4433;;;;
-Bergeronnette grise;bergeronnette_grise;Motacilla alba;Motacillidae;nicheur certain;;;4070;1275;;4070;;;Rien de significatif au dessus de 15kHz;
-Canard colvert;canard_colvert;Anas platyrhynchos;Anatidae;hivernant;;;1645;906;;1645;;;fenetre de FFT de 20ms;
-Chardonneret élégant;chardonneret_elegant;Carduelis carduelis;Fringillidae;nicheur certain;;;3285;1198;;3285;;;overlap de 50%;
-Corneille noire;corneille_noire;Corvus corone;Corvidae;nicheur certain;;;1996;574;;1996;;;durée de 10s, fenêtre de 20 sur 5;
-Epervier d'europe;epervier_d_europe;Accipiter nisus;Accipitridae;nicheur certain au Parc Montsouris;;;2467;1385;;2467;;;;
-Etourneau sansonnet;etourneau_sansonnet;Sturnus vulgaris;Sturnidae;nicheur certain;;;4956;2778;;4956;;;NB ! Martellement du pic épeichette;
-Faucon crécerelle;faucon_crecerelle;Falco tinnunculus;Falconidae;nicheur certain (rue Gazan/rue de l'Amiral Mouchez);;;2891;1767;;2891;;; et roucoulement du pigeon/tourterelle, échelle log plutôt ??;
-Faucon hobereau;faucon_hobereau;Falco subbuteo;Falconidae;;;;4588;2946;;4588;;;;
-Fauvette à tête noire;fauvette_a_tete_noire;Sylvia atricapilla;Sylviidae;nicheur certain;;;3663;1570;;3663;;;;
-Geai des chênes;geai_des_chenes;Garrulus glandarius;Corvidae;nicheur certain;;;4470;2537;;4470;;;;
-Gobemouche gris;gobemouche_gris;Muscicapa striata;Muscicapidae;nicheur certain au Parc Montsouris;;;4474;2546;;4474;;;;
-Gobemouche noir;gobemouche_noir;Ficedula hypoleuca;Muscicapidae;;;;4484;2563;;4484;;;;
-Goéland argenté;goeland_argente;Larus argentatus;Laridés;(Parc Montsouris) En survol (direction Montsouris);;;2316;1344;;2316;;;;
-Grimpereau des jardins;grimpereau_des_jardins;Certhia brachydactyla;Certhiidae;nicheur certain;;;2537;1678;!! Plutôt 6000 moyenne;6000;;;;
-Grive draine;grive_draine;Turdus viscivorus;Muscicapidae;nicheur certain;;;2490;1689;;2490;;;;
-Grive litorne;grive_litorne;Turdus pilaris;Muscicapidae;;;;2399;1378;!! Plutôt 5000 moyenne;5000;;;;
-Grive mauvis;grive_mauvis;Turdus iliacus;Muscicapidae;;;;4520;2537;;4520;;;;
-Grive musicienne;grive_musicienne;Turdus philomelos;Muscicapidae;nicheur certain;;;3562;1703;;3562;;;;
-Héron cendré;heron_cendre;Ardea cinerea;Ardeidae;;;;8500;7168;!! Plutôt 1300 moyenne;1300;;;;
-Hirondelle rustique;hirondelle_rustique;Hirundo rustica;Hirundinidae;;;;4268;1272;;4268;;;;
-Hypolais polyglotte;hypolais_polyglotte;Hippolais polyglotta;Sylviidae;Tentative échouée en 2010;;;4947;2758;;4947;;;;
-Martinet noir;martinet_noir;Apus apus;Apodidae;nicheur certain;;;3503;2347;!! Plutôt 5800 moyenne;5800;;;;
-Merle noir;merle_noir;Turdus merula;Muscicapidae;nicheur certain;;;3357;1411;;3357;;;;
-Mésange à longue queue;mesange_a_longue_queue;Aegithalos caudatus;Aegithalidae;nicheur certain;;;1718;970;!! Plutôt 5000 moyenne;5000;;;;
-Mésange bleue;mesange_bleue;Cyanistes caeruleus;Paridae;nicheur certain;;;4356;1407;!! Plutôt 5500 moyenne;4356;;;;
-Mésange charbonnière;mesange_charbonniere;Parus major;Paridae;nicheur certain;;;4571;2539;;4571;;;;
-Mésange huppée;mesange_huppee;Lophophanes cristatus;Paridae;nicheur certain;;;2286;1304;!! Plutôt 4000 moyenne;4000;;;;
-Mésange noire;mesange_noire;Periparus ater;Paridae;nicheur certain;;;2592;1532;!! Plutôt 5000 moyenne;5000;;;;
-Moineau domestique;moineau_domestique;Passer domesticus;Passeridae;nicheur certain;;;2510;1436;!! Plutôt 3200 moyenne;3200;;;;
-Moineau friquet;moineau_friquet;Passer montanus;Passeridae;nicheur certain;;;2587;1692;;2587;;;;
-Mouette rieuse;mouette_rieuse;Chroicocephalus ridibundus;Laridés;(Parc Montsouris) En survol (direction Montsouris);;;4470;2537;;4470;;;;
-Perruche à collier;perruche_a_collier;Psittacula krameri;Psittacidé;nicheur certain au Parc Montsouris;;;4845;2754;;4845;;;;
-Pic épeiche;pic_epeiche;Dendrocopos major;Picidae;;cris brefs aigus + martellement du bois;;3865;1067;;3865;;;;
-Pic épeichette;pic_epeichette;Dendrocopos minor;Picidae;nicheur certain;martellement du bois;;4489;2569;!! Plutôt 1500 moyenne;1500;;;;
-Pic vert;pic_vert;Picus viridis;Picidae;nicheur certain au Parc Montsouris;;;8535;8413;!! Plutôt 5000 moyenne;5000;;;;
-Pie bavarde;pie_bavarde;Pica pica;Corvidae;nicheur certain;;;3938;1307;;3938;;;;
-Pigeon biset des villes;pigeon_biset_des_villes;Columba livia;Columbidae;nicheur certain;roucoulement;2 secondes / se répètent;4564;2690;!! Plutôt 400 moyenne;400;;;;
-Pigeon colombin;pigeon_colombin;Columba oenas;Columbidae;nicheur certain;;;4472;2540;;4472;;;;
-Pigeon ramier;pigeon_ramier;Columba palumbus;Columbidae;nicheur certain;roucoulement;2 secondes / se répètent;2270;1267;!! Plutôt 450 moyenne;450;;;;
-Pinson des arbres;pinson_des_arbres;Fringilla coelebs;Fringillidae;nicheur certain;;;4173;1471;;4173;;;;
-Pouillot fitis;pouillot_fitis;Phylloscopus trochilus;Sylviidae;(Parc Montsouris) En survol (direction Montsouris);;;4471;2539;;4471;;;;
-Pouillot véloce;pouillot_veloce;Phylloscopus collybita;Sylviidae;nicheur possible;;;4515;1267;;4515;;;;
-Roitelet à triple bandeau;roitelet_a_triple_bandeau;Regulus ignicapilla;Regulidae;;;;2458;1448;!! Plutôt 5000 moyenne;5000;;;;
-Roitelet huppé;roitelet_huppe;Regulus regulus;Regulidae;nicheur certain;chant mélodieux;2 secondes / se répètent;4986;1842;!! Plutôt 7000 moyenne;7000;;;;
-Rougegorge familier;rougegorge_familier;Erithacus rubecula;Muscicapidae;nicheur certain;chant mélodieux;5 secondes / se répètent;4845;2754;;4845;;;;
-Rougequeue noir;rougequeue_noir;Phoenicurus ochruros;Muscicapidae;nicheur certain;chant mélodieux;10 secondes;4185;910;;4185;;;;
-Serin cini;serin_cini;Serinus serinus;Fringillidae;nicheur certain;chant mélodieux;2 secondes / se répètent;3320;2289;;3320;;;;
-Sitelle torchepot;sitelle_torchepot;Sitta europaea;Sittidae;nicheur certain;cris brefs aigus;1 par seconde;3367;969;;3367;;;;
-Tourterelle turque;tourterelle_turque;Streptopelia decaocto;Columbidae;;roucoulement;2 secondes / se répètent;2270;1267;!! Plutôt 500 moyenne;500;;;;
-Troglodyte mignon;trogolodyte_mignon;Troglodytes troglodytes;Troglodytidae;nicheur certain;chant mélodieux;5 secondes;5061;1990;;5061;;;;
-Verdier d'Europe;verdier_d_europe;Carduelis chloris;Fringillidae;nicheur certain;chant mélodieux;10 secondes / se répètent;3121;1545;;3121;;;;
-;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;
-;;;;;;;;;;Moyenne;;;;
-;;;;;;;;;;3811;;;;
-;;;;;;;;;;Min;;;;
-;;;;;;;;;;400;;;;
-;;;;;;;;;;Max;;;;
-;;;;;;;;;;7000;;;;
+Nom vernaculaire;Nom pour fichier;Nom latin;Famille;Statut de reproducteur;;Frequence moyenne
+Accenteur mouchet;accenteur_mouchet;Prunella modularis;Prunellidae;nicheur certain;;5,59E+03
+Bergeronnette grise;bergeronnette_grise;Motacilla alba;Motacillidae;nicheur certain;;5,09E+03
+Canard colvert;canard_colvert;Anas platyrhynchos;Anatidae;hivernant;;2,24E+03
+Chardonneret élégant;chardonneret_elegant;Carduelis carduelis;Fringillidae;nicheur certain;;3,99E+03
+Corneille noire;corneille_noire;Corvus corone;Corvidae;nicheur certain;;1,79E+03
+Epervier d'europe;epervier_d_europe;Accipiter nisus;Accipitridae;nicheur certain au Parc Montsouris;;3,04E+03
+Etourneau sansonnet;etourneau_sansonnet;Sturnus vulgaris;Sturnidae;nicheur certain;;3,20E+03
+Faucon crécerelle;faucon_crecerelle;Falco tinnunculus;Falconidae;nicheur certain (rue Gazan/rue de l'Amiral Mouchez);;3,79E+03
+Faucon hobereau;faucon_hobereau;Falco subbuteo;Falconidae;;;5,99E+02
+Fauvette à tête noire;fauvette_a_tete_noire;Sylvia atricapilla;Sylviidae;nicheur certain;;3,59E+03
+Geai des chênes;geai_des_chenes;Garrulus glandarius;Corvidae;nicheur certain;;2,85E+03
+Gobemouche gris;gobemouche_gris;Muscicapa striata;Muscicapidae;nicheur certain au Parc Montsouris;;4,70E+03
+Gobemouche noir;gobemouche_noir;Ficedula hypoleuca;Muscicapidae;;;1,75E+03
+Goéland argenté;goeland_argente;Larus argentatus;Laridés;(Parc Montsouris) En survol (direction Montsouris);;1,65E+03
+Grimpereau des jardins;grimpereau_des_jardins;Certhia brachydactyla;Certhiidae;nicheur certain;;6,14E+03
+Grive draine;grive_draine;Turdus viscivorus;Muscicapidae;nicheur certain;;2,40E+03
+Grive litorne;grive_litorne;Turdus pilaris;Muscicapidae;;;4,69E+03
+Grive mauvis;grive_mauvis;Turdus iliacus;Muscicapidae;;;1,55E+03
+Grive musicienne;grive_musicienne;Turdus philomelos;Muscicapidae;nicheur certain;;3,24E+03
+Héron cendré;heron_cendre;Ardea cinerea;Ardeidae;;;3,25E+03
+Hirondelle rustique;hirondelle_rustique;Hirundo rustica;Hirundinidae;;;4,84E+03
+Hypolais polyglotte;hypolais_polyglotte;Hippolais polyglotta;Sylviidae;Tentative échouée en 2010;;3,90E+03
+Martinet noir;martinet_noir;Apus apus;Apodidae;nicheur certain;;5,99E+03
+Merle noir;merle_noir;Turdus merula;Muscicapidae;nicheur certain;;3,24E+03
+Mésange à longue queue;mesange_a_longue_queue;Aegithalos caudatus;Aegithalidae;nicheur certain;;2,69E+03
+Mésange bleue;mesange_bleue;Cyanistes caeruleus;Paridae;nicheur certain;;5,48E+03
+Mésange charbonnière;mesange_charbonniere;Parus major;Paridae;nicheur certain;;5,79E+03
+Mésange huppée;mesange_huppee;Lophophanes cristatus;Paridae;nicheur certain;;3,59E+03
+Mésange noire;mesange_noire;Periparus ater;Paridae;nicheur certain;;4,34E+03
+Moineau domestique;moineau_domestique;Passer domesticus;Passeridae;nicheur certain;;3,39E+03
+Moineau friquet;moineau_friquet;Passer montanus;Passeridae;nicheur certain;;3,14E+03
+Mouette rieuse;mouette_rieuse;Chroicocephalus ridibundus;Laridés;(Parc Montsouris) En survol (direction Montsouris);;2,90E+03
+Perruche à collier;perruche_a_collier;Psittacula krameri;Psittacidé;nicheur certain au Parc Montsouris;;4,05E+03
+Pic épeiche;pic_epeiche;Dendrocopos major;Picidae;;;3,79E+03
+Pic épeichette;pic_epeichette;Dendrocopos minor;Picidae;nicheur certain;;6,49E+02
+Pic vert;pic_vert;Picus viridis;Picidae;nicheur certain au Parc Montsouris;;1,80E+03
+Pie bavarde;pie_bavarde;Pica pica;Corvidae;nicheur certain;;3,04E+03
+Pigeon biset des villes;pigeon_biset_des_villes;Columba livia;Columbidae;nicheur certain;;5,99E+02
+Pigeon colombin;pigeon_colombin;Columba oenas;Columbidae;nicheur certain;;3,00E+03
+Pigeon ramier;pigeon_ramier;Columba palumbus;Columbidae;nicheur certain;;4,99E+02
+Pinson des arbres;pinson_des_arbres;Fringilla coelebs;Fringillidae;nicheur certain;;4,14E+03
+Pouillot fitis;pouillot_fitis;Phylloscopus trochilus;Sylviidae;(Parc Montsouris) En survol (direction Montsouris);;3,85E+03
+Pouillot véloce;pouillot_veloce;Phylloscopus collybita;Sylviidae;nicheur possible;;4,74E+03
+Roitelet à triple bandeau;roitelet_a_triple_bandeau;Regulus ignicapilla;Regulidae;;;3,04E+03
+Roitelet huppé;roitelet_huppe;Regulus regulus;Regulidae;nicheur certain;;6,19E+03
+Rougegorge familier;rougegorge_familier;Erithacus rubecula;Muscicapidae;nicheur certain;;1,15E+03
+Rougequeue noir;rougequeue_noir;Phoenicurus ochruros;Muscicapidae;nicheur certain;;4,39E+03
+Serin cini;serin_cini;Serinus serinus;Fringillidae;nicheur certain;;5,28E+03
+Sitelle torchepot;sitelle_torchepot;Sitta europaea;Sittidae;nicheur certain;;3,34E+03
+Tourterelle turque;tourterelle_turque;Streptopelia decaocto;Columbidae;;;8,98E+02
+Troglodyte mignon;trogolodyte_mignon;Troglodytes troglodytes;Troglodytidae;nicheur certain;;5,34E+03
+Verdier d'Europe;verdier_d_europe;Carduelis chloris;Fringillidae;nicheur certain;;4,24E+03
