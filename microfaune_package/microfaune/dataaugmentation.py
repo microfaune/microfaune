@@ -6,15 +6,16 @@ Created on Sat Oct  5 16:18:32 2019
 @author: christian
 """
 import numpy as np
-from microfaune import plot
 from keras.preprocessing.image import ImageDataGenerator
+from microfaune import plot
 
-class data_augmentation:
+class Dataaugmentation:
     """Class to generate image data for rnn modeling
     """
     datagenerator_list = None
 
-    def __init__(self, width_shift_range=[-40,40], horizontal_flip=True, brightness_range=[0.4,0.9]):
+    def __init__(self, width_shift_range=None, horizontal_flip=True, \
+                 brightness_range=None):
         """Initialization data generators
 
         Parameters
@@ -33,20 +34,24 @@ class data_augmentation:
         datagenerator_list: list
             image data generators
         """
+        if width_shift_range is None:
+            width_shift_range = [-40, 40]
+        if brightness_range is None:
+            brightness_range = [0.4, 0.9]
 
         datagen_width_shift = ImageDataGenerator(width_shift_range=width_shift_range)
         datagen_horizontal_flip = ImageDataGenerator(horizontal_flip=horizontal_flip)
         datagen_brightness = ImageDataGenerator(brightness_range=brightness_range)
         self.datagenerator_list = [datagen_width_shift, datagen_horizontal_flip, datagen_brightness]
 
-    def generate_augmentation(self, S, y, my_range=5, to_display=False):
-        """ data augmentation of one Spectrogram 
+    def generate_augmentation(self, spec, y_val, my_range=5, to_display=False):
+        """ data augmentation of one Spectrogram
         Parameters
         ----------
         S spectogram
         y classification value
-        
-        RETURNS
+
+        Returns
         -------
         list_S
             list of Spectograms with Y list (duplicate from y input)
@@ -54,48 +59,45 @@ class data_augmentation:
         list_y
             All y have the value of the given y
         """
-        list_S = [S]
-        list_y = [y]
+        list_s = [spec]
+        list_y = [y_val]
         for datagen in self.datagenerator_list:
-            data = np.expand_dims(S, axis=2)
+            data = np.expand_dims(spec, axis=2)
 
             # expand dimension to one sample
             samples = np.expand_dims(data, 0)
             # prepare iterator
-            it = datagen.flow(samples, batch_size=1)
+            cursor = datagen.flow(samples, batch_size=1)
             # generate samples and plot
-            for i in range(my_range):
-                batch = it.next()
+            for _ in range(my_range):
+                batch = cursor.next()
                 # convert to unsigned integers for viewing
                 image = batch[0].astype('uint8')
-                image = image[:,:,0]
-                list_S.append(image)
-                list_y.append(y)
-                if to_display==True:
+                image = image[:, :, 0]
+                list_s.append(image)
+                list_y.append(y_val)
+                if to_display:
                     plot.plot_spec(image)
-        return list_S, list_y
-    
-    def generate_augmentation_list(self, list_S, list_y, my_range=5, to_display=False):
-        """ data augmentation of a  list of Spectrograms 
+        return list_s, list_y
+
+    def generate_augmentation_list(self, list_s, list_y, my_range=5, to_display=False):
+        """ data augmentation of a  list of Spectrograms
         Parameters
         ----------
         list_S  vector of spectograms
         list_y  vector of y
-        
-        RETURNS
+
+        Returns
         -------
         list_S_augmented
-            list of Spectograms augmented 
+            list of Spectograms augmented
         list_y_augmented
             list of y augmented with duplicate values
         """
-        list_S_augmented = []
+        list_s_augmented = []
         list_y_augmented = []
-        for S, y in zip(list_S, list_y):
-            lstx, lsty = self.generate_augmentation(S, y, my_range, to_display)
-            list_S_augmented += lstx
+        for spec, y_val in zip(list_s, list_y):
+            lstx, lsty = self.generate_augmentation(spec, y_val, my_range, to_display)
+            list_s_augmented += lstx
             list_y_augmented += lsty
-        return list_S_augmented, list_y_augmented
-    
-            
-
+        return list_s_augmented, list_y_augmented
