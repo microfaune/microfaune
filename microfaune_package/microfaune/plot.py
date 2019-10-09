@@ -1,4 +1,7 @@
 import matplotlib.pyplot as plt
+import pylab
+import numpy as np
+import librosa.display
 
 
 def plot_spec(spec, t, f, fs, scale_spec="linear", window_length=0.20, N_MELS=40, overlap=0.5,

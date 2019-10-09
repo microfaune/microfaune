@@ -1,7 +1,8 @@
 import librosa
 import numpy as np
 from scipy.io import wavfile
-import signal
+from scipy import signal
+from math import *
 
 
 def load_wav(path, decimate=None):
@@ -173,10 +174,10 @@ def file2spec(path_file, scale_spec="linear", N_MELS=40, window_length=0.020, ov
     # Load map3 or wav file
 
     if path_file[-4:] == ".wav":
-        x_fs, x = audio.load_wav(path_file)
+        x_fs, x = load_wav(path_file)
 
     elif path_file[-4:] == ".mp3":
-        x_fs, x = audio.load_mp3(path_file)
+        x_fs, x = load_mp3(path_file)
 
     else:
         raise ValueError("Wrong file format, use mp3 or wav")
@@ -205,8 +206,7 @@ def file2spec(path_file, scale_spec="linear", N_MELS=40, window_length=0.020, ov
 
     elif (scale_spec == "MEL"):
         # librosa library does not give access to t and f
-        spec = librosa.feature.melspectrogram(x[:int(fs * duration) + 1], sr=x_fs, n_fft=N_FFT, hop_length=HOP_LEN,
-                                              n_mels=N_MELS)
+        spec = librosa.feature.melspectrogram(x[:int(x_fs * duration) + 1], sr=x_fs, n_fft=N_FFT, hop_length=HOP_LEN, n_mels=N_MELS)
         spec = np.abs(spec)
         t = None
         f = None
