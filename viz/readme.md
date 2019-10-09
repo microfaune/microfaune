@@ -31,11 +31,6 @@ overlap ne joue que sur l'échelle du temps
 nfft réduit le nbre de point en temps
 MEL donne le nbre de points en fréquence
 
-reste à faire : 
-lire un fichier mp3
-
-
-
 NB ! Martellement du pic épeichette
  et roucoulement du pigeon/tourterelle, échelle log plutôt ??
 
