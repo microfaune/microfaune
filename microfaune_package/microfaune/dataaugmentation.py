@@ -9,7 +9,7 @@ import numpy as np
 from keras.preprocessing.image import ImageDataGenerator
 from microfaune import plot
 
-class Dataaugmentation:
+class DataAugmentation:
     """Class to generate image data for rnn modeling
     """
     datagenerator_list = None
@@ -48,12 +48,12 @@ class Dataaugmentation:
         """ data augmentation of one Spectrogram
         Parameters
         ----------
-        S spectogram
-        y classification value
+        spec spectogram
+        y_val classification value
 
         Returns
         -------
-        list_S
+        list_s
             list of Spectograms with Y list (duplicate from y input)
             the first Spectograms is the given input S
         list_y
@@ -84,12 +84,12 @@ class Dataaugmentation:
         """ data augmentation of a  list of Spectrograms
         Parameters
         ----------
-        list_S  vector of spectograms
+        list_s  vector of spectograms
         list_y  vector of y
 
         Returns
         -------
-        list_S_augmented
+        list_s_augmented
             list of Spectograms augmented
         list_y_augmented
             list of y augmented with duplicate values
