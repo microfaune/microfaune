@@ -12,15 +12,15 @@ def plot_spec(spec, t, f, fs, scale_spec="linear", window_length=0.2, overlap=0.
             spec : array-like
                 Array of shape (frequency, time) containing the spectrogram.
             t : array-like
-                Array of shape (time, 1) containing the time scale of spectogram.
+                Array of shape (time, 1) containing the time scale of spectrogram.
                 None if MEL scale is used
             f : array-like
-                Array of shape (frequency, 1) containing the frequency scale of spectogram.
+                Array of shape (frequency, 1) containing the frequency scale of spectrogram.
                 None if MEL scale is used
             fs : int
                 Sampling frequency in Hz.
             scale_spec : str
-                scale used to use to compute spectogram, can be "linear" or "MEL".
+                scale used to use to compute spectrogram, can be "linear" or "MEL".
             window_length : float
                 Length of the FFT window in seconds.
             overlap : float
@@ -38,15 +38,7 @@ def plot_spec(spec, t, f, fs, scale_spec="linear", window_length=0.2, overlap=0.
 
             Returns:
             -------
-            freq_median : int
-                Median frequency of bird song in Hz.
-                None if MEL scale is used
-            freq_min : int
-                Minimum frequency of bird song in Hz (10% quantile).
-                None if MEL scale is used
-            freq_max : int
-                Maximum frequency of bird song in Hz (90% quantile).
-                None if MEL scale is used
+            None
         """
 
     plt.set_cmap('inferno')
@@ -56,7 +48,7 @@ def plot_spec(spec, t, f, fs, scale_spec="linear", window_length=0.2, overlap=0.
     # Derive FFT parameters
     HOP_LEN = int(overlap * window_length * fs) + 1
 
-    if (scale_spec == "linear"):
+    if scale_spec == "linear":
         plt.pcolormesh(t, f, spec)
         plt.xlabel('Time [sec]')
         plt.ylabel('Frequency [Hz]')
@@ -68,7 +60,7 @@ def plot_spec(spec, t, f, fs, scale_spec="linear", window_length=0.2, overlap=0.
             plt.plot([0, t[-1]], [freq_median, freq_median], 'w')
             plt.plot([0, t[-1]], [freq_max, freq_max], 'k')
 
-    elif (scale_spec == "MEL"):
+    elif scale_spec == "MEL":
         librosa.display.specshow(spec, x_axis='time', y_axis='mel', sr=fs, hop_length=HOP_LEN)
 
     else:
@@ -90,7 +82,7 @@ def find_most_used_frequencies(f, spec):
            Parameters
             ----------
             f : array-like
-                Array of shape (frequency, 1) containing the frequency scale of spectogram.
+                Array of shape (frequency, 1) containing the frequency scale of spectrogram.
             spec : array-like
                 Array of shape (frequency, time) containing the spectrogram.
 
@@ -117,7 +109,6 @@ def find_most_used_frequencies(f, spec):
     freq_max = round(np.quantile(freq_most_used, 0.90), 0)
 
     return [freq_median, freq_min, freq_max]
-
 
 
 def plot_audio(fs, data):
