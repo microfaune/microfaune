@@ -25,5 +25,8 @@ The labeling task corresponds to the usage of the labeling tool. We should have 
 
 ### Specs
 
-- Separate each part of bird sounds
-- Don't include other bird sounds (e.g. wing flapping)
+Here are the rules that we use to do the labeling.
+
+- If there are multiple birds singing at the same time: do the labeling as it was a single bird.
+- Separate in two labels if there is a silence of more than 2 seconds.
+- Don't label bird sounds that are not songs (flapping etc.).
