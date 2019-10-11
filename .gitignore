@@ -4,6 +4,18 @@
 data/!
 **/build
 **/__pycache__
+
+/viz/f_max_species_q90.txt
+/viz/f_max_species_q95.txt
+/viz/f_min_species_q90.txt
+/viz/f_min_species_q95.txt
+/viz/f_median_species_q90.txt
+/viz/f_median_species_q95.txt
+
+/viz/spec_10sec_species_q90
+/viz/spec_10sec_species_q95
+
+/viz/audio/species_wav/
 /viz/audio/chardonneret_elegant.wav
 /viz/audio/corneille_noire.wav
 /viz/audio/epervier_d_europe.wav
@@ -53,5 +65,6 @@ data/!
 /viz/audio/tourterelle_turque.wav
 /viz/audio/trogolodyte_mignon.wav
 /viz/audio/verdier_d_europe.wav
+
 microfaune_package/microfaune.egg-info/
 microfaune_package/dist/
