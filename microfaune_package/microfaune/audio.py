@@ -31,8 +31,7 @@ def load_wav(path, decimate=None):
     return fs, data
 
 def load_mp3(path):
-    """
-        Load audio data.
+    """Load audio data.
 
         Parameters
         ----------
@@ -107,7 +106,7 @@ def create_spec(data, fs, n_mels=32, n_fft=2048, hop_len=1024):
     return S
 
 
-def wav2spc(wav_file, fs=44100, n_mels=40, n_fft=2048, hop_len=1024, duration=10):
+def wav2spc(wav_file, fs=44100, n_mels=40, n_fft=2048, hop_len=1024, duration=None):
     """Load a wav file and compute its MEL spectogram.
 
        Parameters
@@ -124,6 +123,7 @@ def wav2spc(wav_file, fs=44100, n_mels=40, n_fft=2048, hop_len=1024, duration=10
            Number of samples between successive frames.
        duration: int
            Duration of the sound to consider (starting at the beginning)
+		   If None, no truncature is made
 
        Returns
        --------
@@ -132,14 +132,17 @@ def wav2spc(wav_file, fs=44100, n_mels=40, n_fft=2048, hop_len=1024, duration=10
     """
 
     x_fs, x = load_wav(wav_file)
+	
+#	if duration is not None:
+#		x = x[:int(x_fs * duration) + 1]
 
     if x_fs != fs:
         raise ValueError(f"wav file with wrong frequency {x_fs}: {wav_file}")
-    spec = create_spec(x[:fs*duration], fs, n_mels, n_fft, hop_len)
+    spec = create_spec(x, fs, n_mels, n_fft, hop_len)
     return spec
 
 
-def file2spec(path_file, scale_spec="linear", N_MELS=40, window_length=0.020, overlap=0.5, f_max=15000, duration=10):
+def file2spec(path_file, scale_spec="linear", N_MELS=40, window_length=0.020, overlap=0.5, f_max=15000, duration=None):
     """ Compute spectogram from a wav or mp3 file.
 
            Parameters
@@ -151,13 +154,14 @@ def file2spec(path_file, scale_spec="linear", N_MELS=40, window_length=0.020, ov
             N_MELS : int
                 Number of Mel bands to generate.
             window_length : float
-                Length of the FFT window in seconds.
+                Length of the FFT window in seconds.	
             overlap : float
                 Overlap of the FFT windows.
             f_max : int
                 Maximum frequency of the FFT domain.
             duration: int
                 Duration of the sound to consider (starting at the beginning)
+				If None, no truncature is made
 
             Returns:
             -------
@@ -186,6 +190,8 @@ def file2spec(path_file, scale_spec="linear", N_MELS=40, window_length=0.020, ov
     # If the file contains several channel
     if len(shape) > 1:
         x = np.sum(x, axis=1)
+#	if duration is not None:
+#		x = x[:int(x_fs * duration) + 1]
 
     # Derive FFT parameters
     N_FFT = int(window_length * x_fs) + 1
@@ -195,7 +201,7 @@ def file2spec(path_file, scale_spec="linear", N_MELS=40, window_length=0.020, ov
     if (scale_spec == "linear"):
         frequency_resolution = x_fs / N_FFT
         size_frequency_axis = 1 + floor(f_max / frequency_resolution)
-        f, t, spec = signal.stft(x[:int(x_fs * duration) + 1], fs=x_fs, nperseg=N_FFT, noverlap=HOP_LEN)
+        f, t, spec = signal.stft(x, fs=x_fs, nperseg=N_FFT, noverlap=HOP_LEN)
         # scipy returns a complex array, only the modulus is used in spectograms
         spec = np.abs(spec)
         # remove frequency above f_max
@@ -206,7 +212,7 @@ def file2spec(path_file, scale_spec="linear", N_MELS=40, window_length=0.020, ov
 
     elif (scale_spec == "MEL"):
         # librosa library does not give access to t and f
-        spec = librosa.feature.melspectrogram(x[:int(x_fs * duration) + 1], sr=x_fs, n_fft=N_FFT, hop_length=HOP_LEN, n_mels=N_MELS)
+        spec = librosa.feature.melspectrogram(x, sr=x_fs, n_fft=N_FFT, hop_length=HOP_LEN, n_mels=N_MELS)
         spec = np.abs(spec)
         t = None
         f = None
@@ -218,3 +224,23 @@ def file2spec(path_file, scale_spec="linear", N_MELS=40, window_length=0.020, ov
     spec = librosa.power_to_db(spec, ref=np.min(spec))
 
     return spec, t, f, x_fs
+
+
+def clean_markers(file_path):
+    """ Clean the marker file exported from Audacity, save a .csv file
+
+        Parameters
+        ----------
+        file_path : str
+            Path of the marker file .txt exported from Audacity
+    """
+    file = open(file_path, 'r')
+    lines_list = file.read()
+    lines_list = lines_list.split('\n')
+    lines_list = lines_list[::2]
+    start_points = [round(float(line.split('\t')[0]), 2) for line in lines_list]
+    end_points = [round(float(line.split('\t')[1]), 2) for line in lines_list]
+    tab = np.array((start_points, end_points)).transpose()
+    np.savetxt(file_path[:-4]+'csv', tab, delimiter=";")
+
+    return True
