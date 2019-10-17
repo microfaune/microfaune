@@ -6,7 +6,7 @@ from math import *
 
 
 def load_wav(path, decimate=None):
-    """Load audio data.
+    """Load audio data wav format.
 
         Parameters
         ----------
@@ -31,7 +31,7 @@ def load_wav(path, decimate=None):
     return fs, data
 
 def load_mp3(path):
-    """Load audio data.
+    """Load audio data mp3 format.
 
         Parameters
         ----------
@@ -49,7 +49,20 @@ def load_mp3(path):
     data, fs = librosa.core.load(path, sr=None)
 
     return fs, data
-  
+
+
+def load_audio(path):
+    if path[-4:] == ".wav":
+        fs, data = load_wav(path)
+
+    elif path[-4:] == ".mp3":
+        fs, data = load_mp3(path)
+
+    else:
+        raise ValueError("Wrong file format, use mp3 or wav")
+
+    return fs, data
+
 
 def cut_audio(old_path, new_path, start, end):
     """
@@ -175,16 +188,8 @@ def file2spec(path_file, scale_spec="linear", N_MELS=40, window_length=0.020, ov
                 None if MEL scale is used
         """
 
-    # Load map3 or wav file
-
-    if path_file[-4:] == ".wav":
-        x_fs, x = load_wav(path_file)
-
-    elif path_file[-4:] == ".mp3":
-        x_fs, x = load_mp3(path_file)
-
-    else:
-        raise ValueError("Wrong file format, use mp3 or wav")
+    # Load audio file
+    x_fs, x = load_audio(path_file)
 
     shape = np.shape(x)
     # If the file contains several channel
@@ -224,23 +229,3 @@ def file2spec(path_file, scale_spec="linear", N_MELS=40, window_length=0.020, ov
     spec = librosa.power_to_db(spec, ref=np.min(spec))
 
     return spec, t, f, x_fs
-
-
-def clean_markers(file_path):
-    """ Clean the marker file exported from Audacity, save a .csv file
-
-        Parameters
-        ----------
-        file_path : str
-            Path of the marker file .txt exported from Audacity
-    """
-    file = open(file_path, 'r')
-    lines_list = file.read()
-    lines_list = lines_list.split('\n')
-    lines_list = lines_list[::2]
-    start_points = [round(float(line.split('\t')[0]), 2) for line in lines_list]
-    end_points = [round(float(line.split('\t')[1]), 2) for line in lines_list]
-    tab = np.array((start_points, end_points)).transpose()
-    np.savetxt(file_path[:-4]+'csv', tab, delimiter=";")
-
-    return True
