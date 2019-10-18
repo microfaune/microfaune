@@ -6,7 +6,7 @@ from math import *
 
 
 def load_wav(path, decimate=None):
-    """Load audio data wav format.
+    """Load audio data.
 
         Parameters
         ----------
@@ -45,7 +45,6 @@ def load_mp3(path):
         fs : int
             Sampling frequency in Hz.
     """
-    # Load data
     data, fs = librosa.core.load(path, sr=None)
 
     return fs, data
@@ -62,7 +61,7 @@ def load_audio(path):
         raise ValueError("Wrong file format, use mp3 or wav")
 
     return fs, data
-
+  
 
 def cut_audio(old_path, new_path, start, end):
     """
@@ -86,6 +85,7 @@ def cut_audio(old_path, new_path, start, end):
     wavfile.write(new_path,fs,data[indx_start:indx_end])
 
     return True
+
 
 def create_spec(data, fs, n_mels=32, n_fft=2048, hop_len=1024):
     """Compute the Mel spectrogram from audio data.
@@ -155,14 +155,14 @@ def wav2spc(wav_file, fs=44100, n_mels=40, n_fft=2048, hop_len=1024, duration=No
 
 
 def file2spec(path_file, scale_spec="linear", N_MELS=40, window_length=0.020, overlap=0.5, f_max=15000, duration=None):
-    """ Compute spectogram from a wav or mp3 file.
+    """ Compute spectrogram from a wav or mp3 file.
 
     Parameters
     ----------
     path_file : str
         path to a wav or mp3 file.
     scale_spec : str
-        scale used to use to compute spectogram, can be "linear" or "MEL".
+        scale used to use to compute spectrogram, can be "linear" or "MEL".
     N_MELS : int
         Number of Mel bands to generate.
     window_length : float
@@ -201,7 +201,7 @@ def file2spec(path_file, scale_spec="linear", N_MELS=40, window_length=0.020, ov
     N_FFT = int(window_length * x_fs) + 1
     HOP_LEN = int(overlap * window_length * x_fs) + 1
 
-    # Compute spectograms
+    # Compute spectrograms
     if (scale_spec == "linear"):
         frequency_resolution = x_fs / N_FFT
         size_frequency_axis = 1 + floor(f_max / frequency_resolution)
