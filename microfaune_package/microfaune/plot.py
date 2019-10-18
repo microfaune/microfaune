@@ -3,6 +3,7 @@ import pylab
 import numpy as np
 import librosa.display
 
+from microfaune import audio, labeling
 
 def plot_spec(spec, t, f, fs, scale_spec="linear", window_length=0.2, overlap=0.5,
               plot_title="", fig_size=(20, 5), save_fig=False, save_path="spec.png", plot_main_frequencies=False):
@@ -134,5 +135,65 @@ def plot_audio(fs, data):
     plt.ylabel('P [W]')
     plt.show()
     plt.close()
+
+    return None
+
+
+def plot_charac_audio(json_file_path, audio_file_path):
+    """ Plot the characteritic function derived on audio time scale from the labels in json file
+                Parameters
+                ----------
+                json_file_path : str
+                    Path of json file.
+                audio_file_path : str
+                    Path of audio file.
+
+    """
+    charac_func = labeling.charac_function_audio(json_file_path, audio_file_path)
+
+    fs, data = audio.load_audio(audio_file_path)
+    t_plot = np.array(range(len(data)))
+    t_plot = t_plot / fs
+
+    pylab.rcParams['figure.figsize'] = (20, 2)
+    plt.close()
+
+    plt.plot(t_plot, charac_func)
+    plt.xlabel('time [s]')
+    plt.ylabel('1 bird / 0 no bird')
+    plt.title('Characteristic function on audio time scale')
+    plt.show()
+
+    return None
+
+
+def plot_charac_spec(audio_file_path, window_length, overlap, charac_func_audio):
+    """ Plot the characteristic function derived on spec time scale from the labels in json file
+            Parameters
+            ----------
+            audio_file_path : str
+                Path of audio file.
+            window_length : float
+                Length of the FFT window in seconds.
+            overlap : float
+                Overlap of the FFT windows.
+            charac_func_audio : numpy array (nb bites in audio,1)
+                Characteristic function derived in audio time scale, equal to 1 on labeled segments, 0 elsewhere
+
+    """
+    charac_func_spec = labeling.charac_function_spec(audio_file_path, window_length, overlap, charac_func_audio)
+
+    fs, data = audio.load_audio(audio_file_path)
+    t_plot = np.array(range(len(charac_func_spec)))
+    t_plot = np.array(range(len(charac_func_spec))) * window_length * (1 - overlap)
+
+    pylab.rcParams['figure.figsize'] = (20, 2)
+    plt.close()
+
+    plt.plot(t_plot, charac_func_spec)
+    plt.xlabel('time [s]')
+    plt.ylabel('1 bird / 0 no bird')
+    plt.title('Characteristic function on spec time scale')
+    plt.show()
 
     return None

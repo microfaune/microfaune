@@ -1,5 +1,6 @@
 .DS_Store
 .ipynb_checkpoints/
+.idea/
 
 data/!
 **/build
@@ -65,6 +66,6 @@ data/!
 /viz/audio/tourterelle_turque.wav
 /viz/audio/trogolodyte_mignon.wav
 /viz/audio/verdier_d_europe.wav
-
+/labeling/test_audacity/
 microfaune_package/microfaune.egg-info/
 microfaune_package/dist/
