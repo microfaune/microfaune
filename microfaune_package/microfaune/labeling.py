@@ -1,0 +1,161 @@
+import numpy as np
+import json
+import matplotlib.pyplot as plt
+import pylab
+
+from microfaune import audio, plot
+
+def read_json_file(json_file_path):
+    """ Count labels in json file.
+
+                Parameters
+                ----------
+                json_file_path : str
+                    Path of json file.
+
+                Returns:
+                -------
+                data_dict : list
+                    List of labels, each label is a dictionnary item with entries 'id', 'start', 'end', 'annotation'
+    """
+    with open(json_file_path) as json_data:
+        data_dict = json.load(json_data)
+    return data_dict
+
+def number_labels(json_file_path):
+    """ Count labels in json file.
+
+            Parameters
+            ----------
+            json_file_path : str
+                Path of json file.
+
+            Returns:
+            -------
+            nb_labels : int
+                Number of labels in json file
+        """
+    data_dict = read_json_file(json_file_path)
+    nb_labels = len(data_dict)
+    return nb_labels
+
+
+def prop_labeled(json_file_path, audio_file_path):
+    """ Compute proportion of the ratio of labels duration compared to total duration of audio
+
+        Parameters
+        ----------
+        json_file_path : str
+            Path of json file.
+        audio_file_path : str
+            Path of audio file.
+
+        Returns:
+        -------
+        ratio : float
+            Ratio of duration of labeled segments and total duration of audio.
+    """
+
+    fs, data = audio.load_audio(audio_file_path)
+    total_duration = len(data) / fs
+
+    data_dict = read_json_file(json_file_path)
+
+    bird_song_duration = 0
+
+    for label in data_dict:
+        bird_song_duration += label['end'] - label['start']
+    ratio = round(bird_song_duration / total_duration, 2)
+
+    return ratio
+
+
+def charac_function_audio(json_file_path, audio_file_path):
+    """ Derive the characteristic function from the labels in json file
+            Parameters
+            ----------
+            json_file_path : str
+                Path of json file.
+            audio_file_path : str
+                Path of audio file.
+
+            Returns:
+            -------
+            charac_func : numpy array (nb bites in audio,1)
+                Characteristic function derived on audio time scale, equal to 1 on labeled segments, 0 elsewhere
+    """
+    fs, data = audio.load_audio(audio_file_path)
+    charac_func = np.zeros((len(data), 1))
+
+    data_dict = read_json_file(json_file_path)
+
+    for label in data_dict:
+        indx_start = int(label['start'] * fs)
+        indx_end = int(label['end'] * fs)
+        charac_func[indx_start:indx_end + 1, 0] = 1
+
+    return charac_func
+
+
+def plot_charac_audio(json_file_path, audio_file_path):
+    """ Plot the characteritic function from the labels in json file
+                Parameters
+                ----------
+                json_file_path : str
+                    Path of json file.
+                audio_file_path : str
+                    Path of audio file.
+
+    """
+    charac_func = labeling.audio_charac_function_audio(json_file_path, audio_file_path)
+
+    fs, data = audio.load_audio(audio_file_path)
+    t_plot = np.array(range(len(data)))
+    t_plot = t_plot / fs
+
+    pylab.rcParams['figure.figsize'] = (20, 2)
+    plt.close()
+
+    plt.plot(t_plot, charac_func)
+    plt.xlabel('time [s]')
+    plt.xlabel('label')
+    plt.show()
+
+    return None
+
+
+def charac_function_spec(audio_file_path, window_length, overlap, charac_func_audio):
+    """ Derive the characteristic function from the labels in json file
+            Parameters
+            ----------
+            audio_file_path : str
+                Path of audio file.
+            window_length : float
+                Length of the FFT window in seconds.
+            overlap : float
+                Overlap of the FFT windows.
+            charac_func_audio : numpy array (nb bites in audio,1)
+                Characteristic function derived in audio time scale, equal to 1 on labeled segments, 0 elsewhere
+
+            Returns:
+            -------
+            charac_func_spec : numpy array (nb bites in audio,1)
+                Characteristic function derived in spectrogram time scale, equal to 1 on labeled segments, 0 elsewhere
+        """
+
+    fs, data = audio.load_audio(audio_file_path)
+    duration = len(data) / fs
+    size_spec = 2 + int(duration / (window_length * (1 - overlap)))
+    size_audio = len(charac_func_audio)
+    regroup_factor = int(size_audio / size_spec)
+
+    charac_func_spec = np.zeros((size_spec, 1))
+
+    for i in range(size_spec):
+        label_local = np.mean(charac_func_audio[i * regroup_factor: (i + 1) * regroup_factor])
+        if label_local > 0.5:
+            charac_func_spec[i] = 1
+
+    return charac_func_spec
+
+
