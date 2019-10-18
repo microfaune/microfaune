@@ -16,11 +16,8 @@ scipy = "*"
 pydrive = "*"
 seaborn = "*"
 tensorflow = "*"
-eeg = {file = "https://github.com/hadrienj/EEG/archive/master.zip"}
-webrtcvad = "*"
-bob-kaldi = "*"
 sklearn = "*"
-microfaune = "*"
+microfaune = {path = "./microfaune_package"}
 
 [requires]
 python_version = "3.7"
