@@ -69,3 +69,4 @@ data/!
 /labeling/test_audacity/
 microfaune_package/microfaune.egg-info/
 microfaune_package/dist/
+/labeling/false_wave_plot_label.wav
