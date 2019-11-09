@@ -157,10 +157,10 @@ def charac_function_fs(fs, window_length, overlap, charac_func_spec):
     fs_spec = 1./dt_spec
     duration = len(charac_func_spec) * dt_spec
 
-    t_spec = np.linspace(0, duration, num=len(charac_func_spec))
-    t_fs = np.linspace(0, duration, num=duration*fs)
+    t_spec = np.linspace(0, duration, num = len(charac_func_spec))
+    t_fs = np.linspace(0, duration, num = duration*fs)
     f = interpolate.interp1d(t_spec, charac_func_spec[:,0])
-    charac_func_fs = np.zeros((int(duration*fs),1))
+    charac_func_fs = np.zeros((int(duration*fs), 1))
     charac_func_fs[:,0] = f(t_fs)
 
     return charac_func_fs
