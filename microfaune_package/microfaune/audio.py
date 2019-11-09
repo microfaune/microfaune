@@ -138,7 +138,7 @@ def wav2spc(wav_file, fs=44100, n_mels=40, n_fft=2048, hop_len=1024, duration=No
 
     Parameters
     ----------
-    wave_file: str
+    wav_file: str
         path to a wav file.
     fs: int
         Sampling frequency in Hz.
@@ -173,32 +173,32 @@ def file2spec(path_file, scale_spec="linear", N_MELS=40, window_length=0.020, ov
 
     Parameters
     ----------
-    path_file : str
-        path to a wav or mp3 file.
-    scale_spec : str
-        scale used to use to compute spectrogram, can be "linear" or "MEL".
-    N_MELS : int
-        Number of Mel bands to generate.
-    window_length : float
-        Length of the FFT window in seconds.
-    overlap : float
-        Overlap of the FFT windows.
-    f_max : int
-        Maximum frequency of the FFT domain.
-    duration: int
-        Duration of the sound to consider (starting at the beginning)
-        If None, no truncature is made
+        path_file : str
+            path to a wav or mp3 file.
+        scale_spec : str
+            scale used to use to compute spectrogram, can be "linear" or "MEL".
+        N_MELS : int
+            Number of Mel bands to generate.
+        window_length : float
+            Length of the FFT window in seconds.
+        overlap : float
+            Overlap of the FFT windows.
+        f_max : int
+            Maximum frequency of the FFT domain.
+        duration: int
+            Duration of the sound to consider (starting at the beginning)
+            If None, no cut is made
 
     Returns:
     -------
-    spec : array-like
-        Array of shape (frequency, time) containing the spectrogram.
-    t : array-like
-        Array of shape (time, 1) containing the time scale of spectogram.
-        None if MEL scale is used
-    f : array-like
-        Array of shape (frequency, 1) containing the frequency scale of spectogram.
-        None if MEL scale is used
+        spec : array-like
+            Array of shape (frequency, time) containing the spectrogram.
+        t : array-like
+            Array of shape (time, 1) containing the time scale of spectogram.
+            None if MEL scale is used
+        f : array-like
+            Array of shape (frequency, 1) containing the frequency scale of spectogram.
+            None if MEL scale is used
     """
 
     # Load audio file
