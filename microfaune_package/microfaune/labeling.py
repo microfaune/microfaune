@@ -99,33 +99,6 @@ def charac_function_audio(json_file_path, audio_file_path):
     return charac_func
 
 
-def plot_charac_audio(json_file_path, audio_file_path):
-    """ Plot the characteritic function from the labels in json file
-                Parameters
-                ----------
-                json_file_path : str
-                    Path of json file.
-                audio_file_path : str
-                    Path of audio file.
-
-    """
-    charac_func = labeling.audio_charac_function_audio(json_file_path, audio_file_path)
-
-    fs, data = audio.load_audio(audio_file_path)
-    t_plot = np.array(range(len(data)))
-    t_plot = t_plot / fs
-
-    pylab.rcParams['figure.figsize'] = (20, 2)
-    plt.close()
-
-    plt.plot(t_plot, charac_func)
-    plt.xlabel('time [s]')
-    plt.xlabel('label')
-    plt.show()
-
-    return None
-
-
 def charac_function_spec(audio_file_path, window_length, overlap, charac_func_audio):
     """ Derive the characteristic function from the labels in json file
             Parameters
