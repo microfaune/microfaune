@@ -2,6 +2,8 @@ import numpy as np
 import json
 import matplotlib.pyplot as plt
 import pylab
+from scipy import interpolate
+from scipy.io import wavfile
 
 from microfaune import audio, plot
 
@@ -158,4 +160,52 @@ def charac_function_spec(audio_file_path, window_length, overlap, charac_func_au
 
     return charac_func_spec
 
+
+def charac_function_fs(fs, window_length, overlap, charac_func_spec):
+    """ Convert the scale of a characteristic function from spec time scale to another time scale with the desired sampling rate
+        Parameters
+        ----------
+            fs: int
+                Sampling frequency in Hz.
+            window_length : float
+                Length of the FFT window in seconds.
+            overlap : float
+                Overlap of the FFT windows.
+            charac_func_spec: numpy array (nb bites in spec,1)
+                Characteristic function derived in spectrogram time scale, equal to 1 on labeled segments, 0 elsewhere
+
+        Returns:
+        -------
+            charac_func_fs : numpy array (fs*duration,1)
+                Characteristic function derived with the desired sampling rate
+        """
+
+    dt_spec = window_length * (1 - overlap)
+    fs_spec = 1./dt_spec
+    duration = len(charac_func_spec) * dt_spec
+
+    t_spec = np.linspace(0, duration, num=len(charac_func_spec))
+    t_fs = np.linspace(0, duration, num=duration*fs)
+    f = interpolate.interp1d(t_spec, charac_func_spec[:,0])
+    charac_func_fs = np.zeros((int(duration*fs),1))
+    charac_func_fs[:,0] = f(t_fs)
+
+    return charac_func_fs
+
+
+def create_wav_with_label(fs, charac_func_fs, file_path):
+    """ Create a false wav file with characteristic function.
+        Used in Audacity to plot spectrogram and label at the same time
+            Parameters
+            ----------
+                fs: int
+                    Sampling frequency in Hz.
+                charac_func_fs : numpy array (fs*duration,1)
+                    Characteristic function derived with the desired sampling rate
+                file_path : str
+                    Path of the wav file path saved
+    """
+    wavfile.write(file_path, fs, charac_func_fs[:, 0])
+
+    return None
 

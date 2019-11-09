@@ -197,3 +197,24 @@ def plot_charac_spec(audio_file_path, window_length, overlap, charac_func_audio)
     plt.show()
 
     return None
+
+def plot_charac_fs(fs, charac_func_fs):
+    """ Plot the characteritic function with known sampling rate
+        Parameters
+        ----------
+            fs: int
+                Sampling frequency in Hz.
+            charac_func_fs : numpy array (fs*duration,1)
+                Characteristic function derived with the desired sampling rate
+
+    """
+    duration = len(charac_func_fs) / fs
+    t_fs = np.arange(0, duration, step=1./fs)
+
+    plt.plot(t_fs, charac_func_fs)
+    plt.xlabel('time [s]')
+    plt.ylabel('1 bird / 0 no bird')
+    plt.title('Characteristic function on with sampling rate ' + str(fs) + 'Hz')
+    plt.show()
+
+    return None

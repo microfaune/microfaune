@@ -51,6 +51,20 @@ def load_mp3(path):
 
 
 def load_audio(path):
+    """Load audio data, mp3 or wav format
+
+    Parameters
+    ----------
+        path : str
+            audio file path.
+
+    Returns:
+    -------
+        data : array-like
+            Audio data.
+        fs : int
+            Sampling frequency in Hz.
+    """
     if path[-4:] == ".wav":
         fs, data = load_wav(path)
 
