@@ -1,6 +1,6 @@
 # Background
 
-Biodiversity evaluation and monitoring is the first step toward its protection. The goal of the Microfaune project is to evaluate avifauna in Cité Universitaire park (Paris, France) from audio recordings.
+Biodiversity evaluation and monitoring is the first step toward its protection. The goal of the Microfaune project is to evaluate avifauna in Cité Internationale park (Paris, France) from audio recordings.
 
 ![swift](images/swift.jpg)
 
@@ -84,9 +84,9 @@ You can find these databases [here](http://machine-listening.eecs.qmul.ac.uk/bir
 
 # Wazo Data
 
-Wazo Data are data from recordings in Cité Universitaire in Paris. Data should be accessible soon.
+Wazo Data are data from recordings in Cité Internationale in Paris. Data should be accessible soon.
 
-# Avifauna at Cité Universitaire
+# Avifauna at Cité Internationale
 
 Here is the data from the scientific survey from 2014:
 
