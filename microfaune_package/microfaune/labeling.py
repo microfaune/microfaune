@@ -1,14 +1,13 @@
 import numpy as np
 import json
-import matplotlib.pyplot as plt
-import pylab
 from scipy import interpolate
 from scipy.io import wavfile
 
 from microfaune import audio, plot
 
+
 def read_json_file(json_file_path):
-    """ Count labels in json file.
+    """ Read json file with labels.
 
                 Parameters
                 ----------
@@ -18,11 +17,12 @@ def read_json_file(json_file_path):
                 Returns:
                 -------
                 data_dict : list
-                    List of labels, each label is a dictionnary item with entries 'id', 'start', 'end', 'annotation'
+                    List of labels, each label is a dictionary item with entries 'id', 'start', 'end', 'annotation'
     """
     with open(json_file_path) as json_data:
         data_dict = json.load(json_data)
     return data_dict
+
 
 def number_labels(json_file_path):
     """ Count labels in json file.
@@ -109,12 +109,12 @@ def charac_function_spec(audio_file_path, window_length, overlap, charac_func_au
                 Length of the FFT window in seconds.
             overlap : float
                 Overlap of the FFT windows.
-            charac_func_audio : numpy array (nb bites in audio,1)
+            charac_func_audio : numpy array (nb of samples in audio file,1)
                 Characteristic function derived in audio time scale, equal to 1 on labeled segments, 0 elsewhere
 
             Returns:
             -------
-            charac_func_spec : numpy array (nb bites in audio,1)
+            charac_func_spec : numpy array (nb of samples in spectrogram,1)
                 Characteristic function derived in spectrogram time scale, equal to 1 on labeled segments, 0 elsewhere
         """
 
@@ -144,12 +144,12 @@ def charac_function_fs(fs, window_length, overlap, charac_func_spec):
                 Length of the FFT window in seconds.
             overlap : float
                 Overlap of the FFT windows.
-            charac_func_spec: numpy array (nb bites in spec,1)
+            charac_func_spec: numpy array (nb of samples in spectrogram, 1)
                 Characteristic function derived in spectrogram time scale, equal to 1 on labeled segments, 0 elsewhere
 
         Returns:
         -------
-            charac_func_fs : numpy array (fs*duration,1)
+            charac_func_fs : numpy array (nb of samples, 1)
                 Characteristic function derived with the desired sampling rate
         """
 
@@ -181,4 +181,3 @@ def create_wav_with_label(fs, charac_func_fs, file_path):
     wavfile.write(file_path, fs, charac_func_fs[:, 0])
 
     return None
-
