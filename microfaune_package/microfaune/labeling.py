@@ -2,6 +2,7 @@ import numpy as np
 import json
 from scipy import interpolate
 from scipy.io import wavfile
+import random
 
 from microfaune import audio, plot
 
@@ -191,8 +192,8 @@ def charac_function_spec_fs(fs, window_length, overlap, charac_func_spec):
 def create_wav_with_label(fs, charac_func_fs, file_path):
     """ Create a false wav file with characteristic function.
         Used in Audacity to plot spectrogram and label at the same time
-            Parameters
-            ----------
+        Parameters
+        ----------
                 fs: int
                     Sampling frequency in Hz.
                 charac_func_fs : numpy array (fs*duration,1)
@@ -201,5 +202,159 @@ def create_wav_with_label(fs, charac_func_fs, file_path):
                     Path of the wav file path saved
     """
     wavfile.write(file_path, fs, charac_func_fs[:, 0])
+
+    return None
+
+
+def create_label_json(path, labels):
+    """ Write a json file from a list of labels
+    Parameters
+    ----------
+        path: str
+            Path of the future json file.
+        labels : list
+            List of labels, each label is a dictionary with keys 'id', 'start', 'end' and 'annotation'
+    """
+    data_dict = []
+
+    for label in labels:
+        data_dict.append({
+            'id': 'none',
+            'start': label['start'],
+            'end': label['end'],
+            'annotation': 'bird'
+        })
+
+    with open(path, 'w') as outfile:
+        json.dump(data_dict, outfile)
+
+    return None
+
+
+def extract_labels(json_path, start_time, duration):
+    """ Extract the labels of the audio extract from the json creating at labeling
+        Parameters
+        ----------
+            json_path: str
+                Path of the json file.
+            start_time: float
+                Start time of audio extract in seconds
+            duration: float
+                Duration of audio extract in seconds
+        Returns
+        -------
+            labels: list
+                List of labelson the audio extract, each label is a dictionary with keys 'id', 'start', 'end' and 'annotation'
+        """
+    data_dict = read_json_file(json_path)
+    labels = []
+
+    for label in data_dict:
+
+        start_label = label['start']
+        end_label = label['end']
+
+        if start_time < start_label:
+            if start_time + duration > end_label:
+                labels.append({
+                    'start': max(start_time, start_label),
+                    'end': min(start_time + duration, end_label)
+                })
+        else:
+            if end_label > start_time:
+                labels.append({
+                    'start': max(start_time, start_label),
+                    'end': min(start_time + duration, end_label)
+                })
+
+    return labels
+
+
+def extract_audio(folder_path, wav_file, json_file, path_database, fs_filter, duration_extract, threshold,
+                  nbre_extracts_pos, nbre_extracts_neg, max_counts):
+    """ Extract the labels of the audio extract from the json creating at labeling
+        Parameters
+        ----------
+            folder_path: str
+                Path of data
+            wav_file: str
+                Name of the wav file.
+            json_file: str
+                Name of the json file
+            path_database: str
+                Path used to save database
+            fs_filter: int
+                Sampling rate of the filter in Hz
+            duration_extract: float
+                Duration of audio to extract in seconds
+            threshold: float
+                Threshold for the proportion of labelised segments to avoid to have very short bird song in positive audio
+            nbre_extracts_pos:
+                Number of audio with bird songs to extract
+            nbre_extracts_neg:
+                Number of audio without bird songs to extract
+            max_counts:
+                Maximum try for random extraction
+    """
+    audio_fs, audio_data = wavfile.read(folder_path + '/wav/' + wav_file)
+
+    duration_audio = len(audio_data) / audio_fs
+    charac_audio = charac_function_audio(folder_path + '/json/' + json_file, folder_path + '/wav/' + wav_file)
+    charac_audio = charac_function_fs(audio_fs, fs_filter, charac_audio)
+
+    positive_extracts = 0
+    negative_extracts = 0
+    counts = 0
+
+    test_label = np.where(charac_audio > 0)
+    prop_labelised = len(test_label[0]) / len(charac_audio)
+    # if no bird label in audio no positive audio extracted
+    if len(test_label[0]) == 0:
+        positive_extracts = nbre_extracts_pos
+    # if there are too many labels no negative audio extracted
+    elif duration_audio * (1 - prop_labelised) < duration_extract:
+        negative_extracts = nbre_extracts_neg
+
+    while (positive_extracts < nbre_extracts_pos or negative_extracts < nbre_extracts_neg) and counts < max_counts:
+
+        start_time = random.random() * (duration_audio - duration_extract)
+
+        charac_filter = np.zeros((len(charac_audio), 1))
+        indx_start = int(start_time * fs_filter)
+        indx_end = int((duration_extract + start_time) * fs_filter) + 1
+        charac_filter[indx_start:indx_end] = 1
+
+        apply_filter = charac_filter * charac_audio
+
+        labeled_segment = np.where(apply_filter > 0)
+        labeled_prop = len(labeled_segment[0]) / (duration_extract * fs_filter)
+
+        if labeled_prop > threshold and positive_extracts < nbre_extracts_pos:
+            path_wav = path_database + 'positive/' + wav_file[:-4] + '_pos_' + str(positive_extracts) + '.wav'
+            indx_start = int(start_time * audio_fs)
+            indx_end = int((duration_extract + start_time) * audio_fs) + 1
+            wavfile.write(path_wav, audio_fs, audio_data[indx_start:indx_end])
+
+            path_json = path_database + 'json/' + wav_file[:-4] + '_pos_' + str(positive_extracts) + '.json'
+            labels_ext = extract_labels(folder_path + '/json/' + json_file, start_time, duration_extract)
+            create_label_json(path_json, labels_ext)
+
+            positive_extracts += 1
+            counts += 1
+
+        elif labeled_prop == 0 and negative_extracts < nbre_extracts_neg:
+            path_wav = path_database + 'negative/' + wav_file[:-4] + '_neg_' + str(negative_extracts) + '.wav'
+            indx_start = int(start_time * audio_fs)
+            indx_end = int((duration_extract + start_time) * audio_fs) + 1
+            wavfile.write(path_wav, audio_fs, audio_data[indx_start:indx_end])
+
+            path_json = path_database + 'json/' + wav_file[:-4] + '_neg_' + str(negative_extracts) + '.json'
+            create_label_json(path_json, [])
+
+            negative_extracts += 1
+            counts += 1
+
+        else:
+            counts += 1
 
     return None
