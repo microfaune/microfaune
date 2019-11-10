@@ -134,7 +134,35 @@ def charac_function_spec(audio_file_path, window_length, overlap, charac_func_au
     return charac_func_spec
 
 
-def charac_function_fs(fs, window_length, overlap, charac_func_spec):
+def charac_function_fs(old_fs, new_fs, charac_func):
+    """ Convert the scale of a characteristic function from spec time scale to another time scale with the desired sampling rate
+        Parameters
+        ----------
+            old_fs: int
+                Sampling frequency in Hz on which charac_func is derived.
+            new_fs: int
+                Sampling frequency in Hz to which charac_func needs to be  converted.
+            charac_func: numpy array (nb of samples, 1)
+                Characteristic function with sampling rate old_fs
+
+        Returns:
+        -------
+            charac_func_new_fs : numpy array (nb of samples, 1)
+                Characteristic function with sampling rate new_fs
+        """
+
+    duration = len(charac_func) / old_fs
+
+    t_old = np.linspace(0, duration, num = len(charac_func))
+    t_new = np.linspace(0, duration, num = duration*new_fs)
+    f = interpolate.interp1d(t_old, charac_func[:,0])
+    charac_func_fs = np.zeros((int(duration*new_fs), 1))
+    charac_func_fs[:,0] = f(t_new)
+
+    return charac_func_fs
+
+
+def charac_function_spec_fs(fs, window_length, overlap, charac_func_spec):
     """ Convert the scale of a characteristic function from spec time scale to another time scale with the desired sampling rate
         Parameters
         ----------
@@ -155,13 +183,7 @@ def charac_function_fs(fs, window_length, overlap, charac_func_spec):
 
     dt_spec = window_length * (1 - overlap)
     fs_spec = 1./dt_spec
-    duration = len(charac_func_spec) * dt_spec
-
-    t_spec = np.linspace(0, duration, num = len(charac_func_spec))
-    t_fs = np.linspace(0, duration, num = duration*fs)
-    f = interpolate.interp1d(t_spec, charac_func_spec[:,0])
-    charac_func_fs = np.zeros((int(duration*fs), 1))
-    charac_func_fs[:,0] = f(t_fs)
+    charac_func_fs = charac_function_fs(fs_spec, fs, charac_func_spec)
 
     return charac_func_fs
 
