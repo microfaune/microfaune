@@ -70,3 +70,5 @@ data/!
 microfaune_package/microfaune.egg-info/
 microfaune_package/dist/
 /labeling/false_wave_plot_label.wav
+/labeling/labeled_files/
+/labeling/database_generated/
