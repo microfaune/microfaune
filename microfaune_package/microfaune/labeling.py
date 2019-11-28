@@ -272,15 +272,17 @@ def extract_labels(json_path, start_time, duration):
     return labels
 
 
-def extract_audio(folder_path, wav_file, json_file, path_database, fs_filter, duration_extract, threshold,
+def extract_audio(wav_folder_path, json_folder_path, wav_file, json_file, path_database, fs_filter, duration_extract, threshold,
                   nbre_extracts_pos, nbre_extracts_neg, max_counts):
     """ Extract the labels of the audio extract from the json creating at labeling
         Parameters
         ----------
-            folder_path: str
-                Path of data
+            wav_folder_path: str
+                Path of wav audio files
+			json_folder_path: str
+                Path of wav json files
             wav_file: str
-                Name of the wav file.
+                Name of the wav file
             json_file: str
                 Name of the json file
             path_database: str
@@ -298,10 +300,10 @@ def extract_audio(folder_path, wav_file, json_file, path_database, fs_filter, du
             max_counts:
                 Maximum try for random extraction
     """
-    audio_fs, audio_data = wavfile.read(folder_path + '/wav/' + wav_file)
+    audio_fs, audio_data = wavfile.read(wav_folder_path + wav_file)
 
     duration_audio = len(audio_data) / audio_fs
-    charac_audio = charac_function_audio(folder_path + '/json/' + json_file, folder_path + '/wav/' + wav_file)
+    charac_audio = charac_function_audio(json_folder_path + json_file, wav_folder_path + wav_file)
     charac_audio = charac_function_fs(audio_fs, fs_filter, charac_audio)
 
     positive_extracts = 0
@@ -319,7 +321,7 @@ def extract_audio(folder_path, wav_file, json_file, path_database, fs_filter, du
 
     while (positive_extracts < nbre_extracts_pos or negative_extracts < nbre_extracts_neg) and counts < max_counts:
 
-        start_time = random.random() * (duration_audio - duration_extract)
+        start_time = round(random.random() * (duration_audio - duration_extract), 2)
 
         charac_filter = np.zeros((len(charac_audio), 1))
         indx_start = int(start_time * fs_filter)
@@ -332,25 +334,25 @@ def extract_audio(folder_path, wav_file, json_file, path_database, fs_filter, du
         labeled_prop = len(labeled_segment[0]) / (duration_extract * fs_filter)
 
         if labeled_prop > threshold and positive_extracts < nbre_extracts_pos:
-            path_wav = path_database + '/positive/' + wav_file[:-4] + '_pos_' + str(positive_extracts) + '.wav'
+            path_wav = path_database + 'positive/' + wav_file[:-4] + '_pos_t0_'+ str(start_time) + '.wav'
             indx_start = int(start_time * audio_fs)
             indx_end = int((duration_extract + start_time) * audio_fs) + 1
             wavfile.write(path_wav, audio_fs, audio_data[indx_start:indx_end])
 
-            path_json = path_database + '/json/' + wav_file[:-4] + '_pos_' + str(positive_extracts) + '.json'
-            labels_ext = extract_labels(folder_path + '/json/' + json_file, start_time, duration_extract)
+            path_json = path_database + 'json/' + wav_file[:-4] + '_pos_t0_'+ str(start_time) + '.json'
+            labels_ext = extract_labels(json_folder_path + json_file, start_time, duration_extract)
             create_label_json(path_json, labels_ext, start_time)
 
             positive_extracts += 1
             counts += 1
 
         elif labeled_prop == 0 and negative_extracts < nbre_extracts_neg:
-            path_wav = path_database + '/negative/' + wav_file[:-4] + '_neg_' + str(negative_extracts) + '.wav'
+            path_wav = path_database + 'negative/' + wav_file[:-4] + '_neg_t0_'+ str(start_time) + '.wav'
             indx_start = int(start_time * audio_fs)
             indx_end = int((duration_extract + start_time) * audio_fs) + 1
             wavfile.write(path_wav, audio_fs, audio_data[indx_start:indx_end])
 
-            path_json = path_database + '/json/' + wav_file[:-4] + '_neg_' + str(negative_extracts) + '.json'
+            path_json = path_database + 'json/' + wav_file[:-4] + '_neg_t0_'+ str(start_time) + '.json'
             create_label_json(path_json)
 
             negative_extracts += 1
