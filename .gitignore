@@ -69,6 +69,8 @@ data/!
 /labeling/test_audacity/
 microfaune_package/microfaune.egg-info/
 microfaune_package/dist/
+/labeling/test_labeling.json
+/labeling/test_labeling.wav
 /labeling/false_wave_plot_label.wav
 /labeling/labeled_files/
 /labeling/database_generated/
