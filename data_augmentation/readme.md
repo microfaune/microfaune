@@ -1,6 +1,8 @@
 # Data Augmentation
 
-Participants: Christian
+First attempt to augment the data.
 
-Add noise from Microfaune audio to bird songs. Test if this leads to
-better performances.
+TO DO
+
+- Add noise from Microfaune audio to bird songs.
+- Test if this leads to better performances.

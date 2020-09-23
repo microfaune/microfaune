@@ -1,38 +1,10 @@
 
 # Data Visualization
 
-Participants: Camille
+Visualization of audio bird data using spectrograms.
 
-Find compact ways to visualize audio bird data and models performances.
+`bird_species.ipynb` is used to calculate the spectrograms of each species from the citeU species.
 
-## Labelised Audio Data
+The notebook `compare_format.ipynb` compare the effect of format (.wav, .mp3) on the spectrogram.
 
-- When do they sing (between 5am and 7am)?
-
-Histograms, heatmaps
-
-- Spectrograms corresponding to each bird segment
-
-## Bilan de l'observation spectrogramme
-
-Rien de significatif au dessus de 15kHz
-pour un spectogramme le plus propre possible
-fenetre de FFT de 20ms
-overlap de 50%
-durée de 10s, fenêtre de 20 sur 5
-à voir si on peut réduire ensuite
-
-pour le linéaire
-overlap ne joue que sur l'échelle du temps
-nfft augmente le nbre de points en fréquence et réduit le nbre de point en temps
-
-pour le mel
-overlap ne joue que sur l'échelle du temps
-nfft réduit le nbre de point en temps
-MEL donne le nbre de points en fréquence
-
-NB ! Martellement du pic épeichette
- et roucoulement du pigeon/tourterelle, échelle log plutôt ??
-
-
-
+`compare_spectrograms.ipynb` visualize various example of audio extracts from citeU. Some tests on denoising using external tools have been tried.
