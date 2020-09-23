@@ -91,25 +91,25 @@ The first tests were run by combining the *freefield* and the *warblr* datasets 
 
 The model has a global accuracy of 90.18% and an AUC of 0.955.
 
-![Precision/Recall curve](imgs/PR_curve.png)
+![Precision/Recall curve](images/PR_curve.png)
 
 
 This suggests that the recall could be over 95% while keeping a precision of 83.5%.
 
 ### Examples
 **CORRECT PREDICTIONS**
-![positive success](imgs/positive_success.png)
-![negative success](imgs/negative_success.png)
+![positive success](images/positive_success.png)
+![negative success](images/negative_success.png)
 
 **FALSE PREDICTIONS**
-![positive error](imgs/positive_error.png)
-![negative error](imgs/negative_error.png)
+![positive error](images/positive_error.png)
+![negative error](images/negative_error.png)
 
 **LABELLING ERRORS**
 
 There seems to be some errors in the annotations:
 
-![labelling_error](imgs/labelling_error.png)
+![labelling_error](images/labelling_error.png)
 
 
 
