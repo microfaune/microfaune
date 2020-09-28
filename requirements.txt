@@ -1,0 +1,16 @@
+beautifulsoup4==4.9.1
+keras==2.4.3
+librosa==0.8.0
+matplotlib==3.3.2
+numpy==1.18.5
+pandas==1.1.2
+scipy==1.4.1
+tensorflow==2.3.0
+#
+# NB_1:
+# tensorflow 2.3.0 requires numpy<1.19.0,>=1.16.0
+# tensorflow 2.3.0 requires scipy==1.4.1
+#
+# NB_2:
+# https://stackoverflow.com/questions/63277123/what-is-use-feature-2020-resolver-error-message-with-jupyter-installation-on
+# We recommend you use --use-feature=2020-resolver to test your packages with the new resolver before it becomes the default.

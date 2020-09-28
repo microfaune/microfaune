@@ -4,9 +4,10 @@ import numpy as np
 
 from tensorflow import keras
 from tensorflow.keras import layers
-from tensorflow.math import reduce_max
+from tensorflow import math
 
-from .audio import load_wav, create_spec
+
+from microfaune.audio import load_wav, create_spec
 
 RNN_WEIGHTS_FILE = os.path.abspath(
     os.path.join(os.path.dirname(__file__),
@@ -65,15 +66,18 @@ class RNNDetector:
         x = layers.ReLU()(x)
         x = layers.MaxPool2D((1, 2))(x)
 
-        x = reduce_max(x, axis=-2)
+        x = math.reduce_max(x, axis=-2)
 
-        x = layers.Bidirectional(layers.GRU(64, return_sequences=True))(x)
-        x = layers.Bidirectional(layers.GRU(64, return_sequences=True))(x)
+
+        # x = layers.Bidirectional(layers.GRU(64, return_sequences=True))(x)
+        # x = layers.Bidirectional(layers.GRU(64, return_sequences=True))(x)
+        x = layers.Bidirectional(layers.GRU(64, return_sequences=True, reset_after=False))(x)
+        x = layers.Bidirectional(layers.GRU(64, return_sequences=True, reset_after=False))(x)
 
         x = layers.TimeDistributed(layers.Dense(64, activation="sigmoid"))(x)
         local_pred = layers.TimeDistributed(
             layers.Dense(1, activation="sigmoid"))(x)
-        pred = reduce_max(local_pred, axis=-2)
+        pred = math.reduce_max(local_pred, axis=-2)
         return keras.Model(inputs=spec, outputs=[pred, local_pred])
 
     def compute_features(self, audio_signals):
@@ -144,3 +148,10 @@ class RNNDetector:
     def free_mem(self):
         """Release GPU memory."""
         self._model = None
+
+
+if __name__ == '__main__' :
+    detector = RNNDetector()
+    global_score, local_score = detector.predict_on_wav(os.path.abspath(os.path.join(os.path.dirname(__file__), "data/SWIFT_20190723_050006.wav"))) # NB: Check that loaded wav file actually exists on your disk
+    print(f"Golbal score: {global_score}  -  Localscore: {local_score}")
+
