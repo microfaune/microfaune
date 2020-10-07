@@ -11,7 +11,7 @@ from microfaune.audio import load_wav, create_spec
 
 RNN_WEIGHTS_FILE = os.path.abspath(
     os.path.join(os.path.dirname(__file__),
-                 "data/model_weights-20190919_220113.h5"))
+                 "data/model_weights_tf2-20200912_173814.h5"))
 
 
 class RNNDetector:
@@ -68,11 +68,8 @@ class RNNDetector:
 
         x = math.reduce_max(x, axis=-2)
 
-
-        # x = layers.Bidirectional(layers.GRU(64, return_sequences=True))(x)
-        # x = layers.Bidirectional(layers.GRU(64, return_sequences=True))(x)
-        x = layers.Bidirectional(layers.GRU(64, return_sequences=True, reset_after=False))(x)
-        x = layers.Bidirectional(layers.GRU(64, return_sequences=True, reset_after=False))(x)
+        x = layers.Bidirectional(layers.GRU(64, return_sequences=True))(x)
+        x = layers.Bidirectional(layers.GRU(64, return_sequences=True))(x)
 
         x = layers.TimeDistributed(layers.Dense(64, activation="sigmoid"))(x)
         local_pred = layers.TimeDistributed(
@@ -149,7 +146,7 @@ class RNNDetector:
         """Release GPU memory."""
         self._model = None
 
-
+import matplotlib.pyplot as plt
 if __name__ == '__main__' :
     detector = RNNDetector()
     global_score, local_score = detector.predict_on_wav(os.path.abspath(os.path.join(os.path.dirname(__file__), "data/SWIFT_20190723_050006.wav"))) # NB: Check that loaded wav file actually exists on your disk
